@@ -1301,7 +1301,7 @@
   <string name="assistant_page_local_tools_proactive_message_desc">Let the AI send messages proactively at random intervals</string>
   <string name="chat_message_tool_proactive_message">Proactive message</string>
   <string name="assistant_page_local_tools_health_data_title">Health Data</string>
-  <string name="assistant_page_local_tools_health_data_desc">Let the AI read smartwatch health data via Gadgetbridge</string>
+  <string name="assistant_page_local_tools_health_data_desc">Let the AI read smartwatch health data via Gadgetbridge. Place DB at /sdcard/Gadgetbridge/gadgetbridge.db</string>
   <string name="chat_message_tool_health_data">Health data</string>
   <string name="assistant_page_local_tools_supabase_title">Supabase Sync</string>
   <string name="assistant_page_local_tools_supabase_desc">Sync data to Supabase cloud database for persistence and cross-device access</string>
