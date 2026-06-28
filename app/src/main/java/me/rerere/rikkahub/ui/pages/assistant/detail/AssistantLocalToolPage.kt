@@ -2,7 +2,6 @@ package me.rerere.rikkahub.ui.pages.assistant.detail
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -182,12 +181,18 @@ private fun AssistantLocalToolContent(
             }
         }
         if (enabled && option == LocalToolOption.Notification) {
-            toaster.show(
-                message = notificationPermissionRequiredText,
-                type = ToastType.Info
+            val enabledListeners = Settings.Secure.getString(
+                context.contentResolver, "enabled_notification_listeners"
             )
-            context.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
-            return
+            val isListenerEnabled = enabledListeners?.contains(context.packageName) == true
+            if (!isListenerEnabled) {
+                toaster.show(
+                    message = notificationPermissionRequiredText,
+                    type = ToastType.Info
+                )
+                context.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+                return
+            }
         }
         if (option == LocalToolOption.ProactiveMessaging) {
             if (enabled) {
