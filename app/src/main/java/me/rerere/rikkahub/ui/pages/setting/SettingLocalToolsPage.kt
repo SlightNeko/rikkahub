@@ -77,7 +77,7 @@ fun SettingLocalToolsPage() {
                     modifier = Modifier.padding(horizontal = 8.dp),
                     title = { Text(stringResource(R.string.setting_local_tools_all_tools)) }
                 ) {
-                    LocalToolOption.entries.forEach { option ->
+                    LocalToolOption.values().forEach { option ->
                         val icon = toolIcon(option)
                         val title = toolTitle(option, context)
                         val desc = toolDesc(option, context)

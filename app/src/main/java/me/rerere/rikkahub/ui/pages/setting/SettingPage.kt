@@ -55,10 +55,10 @@ import me.rerere.hugeicons.stroke.GlobalSearch
 import me.rerere.hugeicons.stroke.ImageUpload
 import me.rerere.hugeicons.stroke.InLove
 import me.rerere.hugeicons.stroke.LookTop
+import me.rerere.hugeicons.stroke.Link01
 import me.rerere.hugeicons.stroke.McpServer
 import me.rerere.hugeicons.stroke.Megaphone01
 import me.rerere.hugeicons.stroke.Package
-import me.rerere.hugeicons.stroke.PlugConnected
 import me.rerere.hugeicons.stroke.ServerStack01
 import me.rerere.hugeicons.stroke.Settings03
 import me.rerere.hugeicons.stroke.Share04
@@ -216,7 +216,7 @@ fun SettingPage(vm: SettingVM = koinViewModel()) {
                     )
                     item(
                         onClick = { navController.navigate(Screen.SettingIntegration) },
-                        leadingContent = { Icon(HugeIcons.PlugConnected, null) },
+                        leadingContent = { Icon(HugeIcons.Link01, null) },
                         supportingContent = { Text(stringResource(R.string.setting_integration_desc)) },
                         headlineContent = { Text(stringResource(R.string.setting_integration_title)) },
                     )
