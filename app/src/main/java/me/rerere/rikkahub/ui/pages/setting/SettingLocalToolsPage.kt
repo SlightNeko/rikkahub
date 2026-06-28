@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -23,8 +24,9 @@ import me.rerere.hugeicons.stroke.AlarmClock
 import me.rerere.hugeicons.stroke.BatteryFull
 import me.rerere.hugeicons.stroke.Calendar01
 import me.rerere.hugeicons.stroke.Camera01
-import me.rerere.hugeicons.stroke.Clock01
+import me.rerere.hugeicons.stroke.Codesandbox
 import me.rerere.hugeicons.stroke.Copy01
+import me.rerere.hugeicons.stroke.Database02
 import me.rerere.hugeicons.stroke.Favourite
 import me.rerere.hugeicons.stroke.HeadphoneMute
 import me.rerere.hugeicons.stroke.Location01
@@ -32,6 +34,7 @@ import me.rerere.hugeicons.stroke.MarketAnalysis
 import me.rerere.hugeicons.stroke.Message01
 import me.rerere.hugeicons.stroke.MusicNote01
 import me.rerere.hugeicons.stroke.Notification01
+import me.rerere.hugeicons.stroke.Time02
 import me.rerere.hugeicons.stroke.WavingHand01
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.data.ai.tools.local.LocalToolOption
@@ -105,7 +108,7 @@ fun SettingLocalToolsPage() {
                         val title = context.getString(titleRes)
                         val desc = toolDesc(option, context)
                         item(
-                            leadingContent = { Icon(icon, null) },
+                            leadingContent = { Icon(icon, null, modifier = Modifier.size(24.dp)) },
                             headlineContent = { Text(title) },
                             supportingContent = { Text(desc) }
                         )
@@ -117,8 +120,8 @@ fun SettingLocalToolsPage() {
 }
 
 private fun toolIcon(option: LocalToolOption) = when (option) {
-    LocalToolOption.JavascriptEngine -> HugeIcons.MarketAnalysis
-    LocalToolOption.TimeInfo -> HugeIcons.Clock01
+    LocalToolOption.JavascriptEngine -> HugeIcons.Codesandbox
+    LocalToolOption.TimeInfo -> HugeIcons.Time02
     LocalToolOption.Clipboard -> HugeIcons.Copy01
     LocalToolOption.Tts -> HugeIcons.HeadphoneMute
     LocalToolOption.AskUser -> HugeIcons.WavingHand01
@@ -136,7 +139,7 @@ private fun toolIcon(option: LocalToolOption) = when (option) {
     LocalToolOption.ScreenEvents -> HugeIcons.Favourite
     LocalToolOption.ProactiveMessaging -> HugeIcons.Message01
     LocalToolOption.HealthData -> HugeIcons.Favourite
-    LocalToolOption.Supabase -> HugeIcons.MarketAnalysis
+    LocalToolOption.Supabase -> HugeIcons.Database02
 }
 
 private fun toolDesc(option: LocalToolOption, context: Context): String {

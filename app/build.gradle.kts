@@ -67,6 +67,15 @@ android {
                 }
             }
         }
+        create("nekohub") {
+            val keystorePath = System.getenv("NEKOHUB_KEYSTORE") ?: project.findProperty("nekohub.keystore") as? String
+            if (keystorePath != null) {
+                storeFile = file(keystorePath)
+                storePassword = System.getenv("NEKOHUB_STORE_PASSWORD") ?: project.findProperty("nekohub.storePassword") as? String ?: ""
+                keyAlias = System.getenv("NEKOHUB_KEY_ALIAS") ?: project.findProperty("nekohub.keyAlias") as? String ?: ""
+                keyPassword = System.getenv("NEKOHUB_KEY_PASSWORD") ?: project.findProperty("nekohub.keyPassword") as? String ?: ""
+            }
+        }
     }
 
     buildTypes {
@@ -83,6 +92,7 @@ android {
         }
         debug {
             applicationIdSuffix = ".debug"
+            signingConfig = signingConfigs.getByName("nekohub")
             buildConfigField("String", "VERSION_NAME", "\"${android.defaultConfig.versionName}\"")
             buildConfigField("String", "VERSION_CODE", "\"${android.defaultConfig.versionCode}\"")
         }

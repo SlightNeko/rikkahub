@@ -1,14 +1,8 @@
 <div align="center">
   <img src="docs/icon.png" alt="App Icon" width="100" />
-  <h1>RikkaHub</h1>
+  <h1>NekoHub</h1>
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rikkahub/rikkahub)
-[![Ask DeepWiki](https://img.shields.io/badge/zread.ai-blue?style=flat&logo=readthedocs)](https://zread.ai/rikkahub/rikkahub)
-
-A native Android LLM chat client that supports switching between different providers for
-conversations 🤖💬
-
-Click to join our Discord server 👉 [【RikkaHub】](https://discord.gg/9weBqxe5c4)
+Forked from [RikkaHub](https://github.com/re-ovo/rikkahub) — extended with system-level AI tools.
 
 [简体中文](README_ZH_CN.md) | [繁體中文](README_ZH_TW.md) | English
 </div>
@@ -20,75 +14,61 @@ Click to join our Discord server 👉 [【RikkaHub】](https://discord.gg/9weBqx
 
 ## 🚀 Download
 
-🔗 [Download from Website](https://rikka-ai.com/download) (Recommended)
+🔗 [Download Debug APK](https://github.com/SlightNeko/rikkahub/actions) — Latest CI build artifacts
 
-🔗 [Download from Google Play](https://play.google.com/store/apps/details?id=me.rerere.rikkahub)
+This is a fork with added features. Not on Google Play.
 
-## 💖 Sponsors
+## ✨ What's New (Fork Features)
 
-|                                         Sponsor                                         | Description                                                                                                                                                                                                                                         |
-|:---------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="docs/sponsors/aihubmix.png" alt="Aihubmix" width="50" /><br /><b>Aihubmix</b> | Thanks to <a href="https://aihubmix.com?aff=pG7r">aihubmix.com</a> for their financial support. We recommend using aihubmix as a one-stop shop for mainstream models worldwide. (OpenAI, Claude, Google Gemini, DeepSeek, Qwen, and hundreds more). |
-| <img src="docs/sponsors/suixiang.jpg" alt="随想AI网关" width="50" /><br /><b>随想AI网关</b> | 感谢随想AI网关对本项目的赞助！随想AI网关 是一家可靠高效的 API 中继服务提供商，提供 Claude、Codex、Gemini 等的中继服务。注重隐私的中转站·无数据倒卖·无模型掺水，隐私，透明，极速售后。新账户注册每日签到就送 0.5 元测试额度，充值额度 1:1，无需订阅，按量付费。多线路冗余、跨区域容灾、自动故障切换，长链路 SSE 不中断。99.9% 可用性，关键调用从不掉队。 |
+This fork adds 20+ local system tools enabling the AI assistant to interact with your Android device:
 
-## ✨ Features
+| Category | Tools |
+|----------|-------|
+| 📷 **Media** | Camera (silent photo), Music Control |
+| 📍 **Location** | GPS, Nearby POI (via Amap), Location Tracking |
+| 📅 **Schedule** | Calendar, Alarm, Time Info |
+| 📱 **Device** | Battery, Screen Time, App Usage Trajectory, Screen Events, Clipboard |
+| 💬 **Communication** | SMS, Notification Listener, Proactive Messaging |
+| 💪 **Health** | Gadgetbridge Health Data |
+| ☁️ **Sync** | Supabase Cloud Sync |
+| ⚙️ **Settings** | Permission Manager, Integration Config (Amap API Key, Health DB, Supabase) |
+
+### Settings Additions
+- **Permissions** — Check & grant all app permissions in one place
+- **Local Tools** — Browse all available system tools
+- **Integrations** — Configure Amap API key, Gadgetbridge DB path, Supabase credentials
+
+## ✨ Features (from original RikkaHub)
 
 - 🎨 Material You Design and 🌙 Dark mode
 - 📦 Workspace: a proot-based Linux agent environment
-- 🔄 Multiple AI Provider Support: custom API / URL / models (all OpenAI, Google, Anthropic compatible api)
-- 🖼️ Multimodal input support (Image, Text Documentation, PDF, Docx)
+- 🔄 Multiple AI Provider Support
+- 🖼️ Multimodal input support
 - 🖥️ Web access for multi-platform use
 - 🛠️ MCP support
-- 📝 Markdown Rendering (with code highlighting, Latex formulas, tables, Mermaid)
+- 📝 Markdown Rendering
 - 🪾 Message Branching
-- 🔍 Search capabilities (Exa, Tavily, Zhipu, LinkUp, Brave, Perplexity, etc.)
-- 🧩 Prompt variables (model name, time, etc.)
-- 🤳 QR code export and import for providers
+- 🔍 Search capabilities
+- 🧩 Prompt variables
+- 🤳 QR code config sharing
 - 🤖 Agent customization
-- 🧠 ChatGPT-like memory feature
+- 🧠 ChatGPT-like memory
 - 📝 AI Translation
-- 🌐 Custom HTTP request headers and request bodies
-- 💌 Silly Tavern character card import
 
-## ✨ Contributing
+## 🔧 Building
 
-This project is developed using [Android Studio](https://developer.android.com/studio). PRs are
-welcome!
+Fork of [re-ovo/rikkahub](https://github.com/re-ovo/rikkahub). See [AGENTS.md](CLAUDE.md).
 
-Technology stack documentation:
+```bash
+# Clone
+git clone https://github.com/SlightNeko/rikkahub.git
+```
 
-- [Kotlin](https://kotlinlang.org/) (Development language)
-- [Koin](https://insert-koin.io/) (Dependency Injection)
-- [Jetpack Compose](https://developer.android.com/jetpack/compose) (UI framework)
-- [DataStore](https://developer.android.com/topic/libraries/architecture/datastore) (Preference data
-  storage)
-- [Room](https://developer.android.com/training/data-storage/room) (Database)
-- [Coil](https://coil-kt.github.io/coil/) (Image loading)
-- [Material You](https://m3.material.io/) (UI design)
-- [Navigation 3](https://developer.android.com/guide/navigation/navigation-3) (Navigation)
-- [Okhttp](https://square.github.io/okhttp/) (HTTP client)
-- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) (JSON serialization)
+Builds automatically via GitHub Actions on push to master.
 
 > [!TIP]
-> You need a `google-services.json` file at `app` folder to build the app.
-
-> [!IMPORTANT]  
-> The following PRs will be rejected:
-> 1. Translation related changes, such as adding new languages or updating existing translations
-> 2. Adding new features, this project is opinionated and will not accept pull requests for new features
-> 3. Large-scale refactoring and changes generated by AI
-
-## 💰 Donate
-
-* [Patreon](https://patreon.com/rikkahub)
-* [爱发电](https://afdian.com/a/reovo)
-
-## ⭐ Star History
-
-If you like this project, please give it a star ⭐
-
-[![Star History Chart](https://api.star-history.com/svg?repos=re-ovo/rikkahub&type=Date)](https://star-history.com/#re-ovo/rikkahub&Date)
+> You need a `google-services.json` file at `app` folder for Firebase. CI creates a dummy one.
 
 ## 📄 License
 
-[License](LICENSE)
+Same as upstream: [AGPL v3.0](LICENSE)

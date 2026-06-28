@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -55,7 +56,7 @@ fun SettingPermissionPage() {
     // Permission request launcher
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
-    ) { _ -> /* state refreshes via key update below */ }
+    ) { refresh() }
     
     var refreshKey by remember { mutableStateOf(0) }
     fun refresh() { refreshKey++ }
@@ -72,6 +73,7 @@ fun SettingPermissionPage() {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = CustomColors.topBarColors.containerColor
     ) { innerPadding ->
+        key(refreshKey) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = innerPadding + PaddingValues(8.dp),
@@ -194,6 +196,7 @@ fun SettingPermissionPage() {
                     }
                 }
             }
+        }
         }
     }
 }

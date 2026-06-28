@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -27,6 +29,16 @@ jobs:
           sudo apt-get install -y -qq zsh
           corepack enable
           corepack prepare pnpm@latest --activate
+
+      - name: Generate signing keystore
+        run: |
+          keytool -genkey -v \
+            -keystore neko.keystore \
+            -alias slightNeko \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass 'A%p5uLwSu3j#fBw' \
+            -keypass 'A%p5uLwSu3j#fBw' \
+            -dname "CN=SlightNeko, OU=NekoHub, O=NekoHub, L=Unknown, ST=Unknown, C=CN"
 
       - name: Create google-services.json
         run: |
@@ -71,10 +83,31 @@ jobs:
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon --stacktrace
+        env:
+          NEKOHUB_KEYSTORE: ${{ github.workspace }}/neko.keystore
+          NEKOHUB_STORE_PASSWORD: 'A%p5uLwSu3j#fBw'
+          NEKOHUB_KEY_ALIAS: slightNeko
+          NEKOHUB_KEY_PASSWORD: 'A%p5uLwSu3j#fBw'
 
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: rikkahub-debug
+          name: NekoHub-debug
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
+
+      - name: Find APK
+        id: apk
+        run: |
+          APK=$(ls app/build/outputs/apk/debug/*.apk | head -1)
+          echo "path=$APK" >> $GITHUB_OUTPUT
+          echo "name=$(basename $APK)" >> $GITHUB_OUTPUT
+
+      - name: Create Pre-release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.apk.outputs.path }}
+          name: "NekoHub Debug Build"
+          tag_name: "build-${{ github.run_number }}"
+          prerelease: true
+          generate_release_notes: true
