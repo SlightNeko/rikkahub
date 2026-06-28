@@ -1308,7 +1308,7 @@
   <string name="assistant_page_local_tools_supabase_title">Supabase Sync</string>
   <string name="assistant_page_local_tools_supabase_desc">Sync data to Supabase cloud database for persistence and cross-device access</string>
   <string name="chat_message_tool_supabase">Supabase sync</string>
-  <string name="assistant_page_local_tools_alarm_permission_required">Precise alarm permission is required. Please grant \"Alarms & reminers\" access on the next screen.</string>
+  <string name="assistant_page_local_tools_alarm_permission_required">Precise alarm permission is required. Please grant "Alarms &amp; reminders" access on the next screen.</string>
   <string name="assistant_page_local_tools_notification_permission_required">Notification listener permission is required. Please enable RikkaHub on the next screen.</string>
 </resources>
 
