@@ -75,8 +75,7 @@ fun SettingPermissionPage() {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = innerPadding + PaddingValues(8.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            key = refreshKey
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
                 Card(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
