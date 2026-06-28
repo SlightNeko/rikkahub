@@ -121,8 +121,13 @@ fun SettingAboutPage() {
                         )
 
                         Text(
-                            text = "RikkaHub",
+                            text = stringResource(R.string.about_page_fork_name),
                             style = MaterialTheme.typography.displaySmall,
+                        )
+                        Text(
+                            text = stringResource(R.string.about_page_fork_desc),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
@@ -163,10 +168,10 @@ fun SettingAboutPage() {
                             headlineContent = { Text(stringResource(R.string.about_page_website)) },
                         )
                         item(
-                            onClick = { context.openUrl("https://github.com/rikkahub/rikkahub") },
+                            onClick = { context.openUrl("https://github.com/SlightNeko/rikkahub") },
                             leadingContent = { Icon(HugeIcons.Github, null) },
-                            supportingContent = { Text("https://github.com/rikkahub/rikkahub") },
-                            headlineContent = { Text(stringResource(R.string.about_page_github)) },
+                            supportingContent = { Text(stringResource(R.string.about_page_fork_github)) },
+                            headlineContent = { Text("github.com/SlightNeko/rikkahub") },
                         )
                         item(
                             onClick = { context.openUrl("https://github.com/rikkahub/rikkahub/blob/master/LICENSE") },

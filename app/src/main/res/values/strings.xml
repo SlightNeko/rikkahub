@@ -827,7 +827,11 @@
   <string name="setting_page_display_setting">Display Settings</string>
   <string name="setting_page_display_setting_desc">Manage display settings</string>
   <string name="setting_page_preferences">Preferences</string>
-  <string name="setting_page_preferences_desc">Theme, notifications, UI and general settings</string>
+  <string name="setting_page_preferences_desc">Display, notifications, and behavior settings</string>
+  <string name="setting_page_permission">Permissions</string>
+  <string name="setting_page_permission_desc">Check and manage app permissions</string>
+  <string name="setting_page_local_tools">Local Tools</string>
+  <string name="setting_page_local_tools_desc">Browse and enable system-level tools</string>
   <string name="setting_page_preferences_theme">Theme</string>
   <string name="setting_page_preferences_theme_desc">Dynamic color, theme, AMOLED dark mode</string>
   <string name="setting_page_preferences_notification">Notifications</string>
@@ -1308,5 +1312,44 @@
   <string name="chat_message_tool_supabase">Supabase sync</string>
   <string name="assistant_page_local_tools_alarm_permission_required">Precise alarm permission is required. Please grant "Alarms &amp; reminders" access on the next screen.</string>
   <string name="assistant_page_local_tools_notification_permission_required">Notification listener permission is required. Please enable RikkaHub on the next screen.</string>
+  <!-- Permission Status Page -->
+  <string name="setting_permission_title">Permissions</string>
+  <string name="setting_permission_essential">Essential Permissions</string>
+  <string name="setting_permission_communication">Communication</string>
+  <string name="setting_permission_special">Special Permissions</string>
+  <string name="setting_permission_tip">Tap any item to open system settings and change permissions.</string>
+  <string name="permission_location">Location</string>
+  <string name="permission_location_desc">Access precise location for weather, POI, and location-aware features</string>
+  <string name="permission_sms">SMS</string>
+  <string name="permission_sms_desc">Read SMS messages so the AI can help manage your messages</string>
+  <string name="permission_alarm">Alarm</string>
+  <string name="permission_notification_listener">Notification Listener</string>
+  <string name="permission_status_granted">Granted</string>
+  <string name="permission_status_denied">Denied</string>
+  <!-- Local Tools Quick Access -->
+  <string name="setting_local_tools_title">Local Tools</string>
+  <string name="setting_local_tools_desc">All available local tools in this app. Enable them per assistant in Assistant settings.</string>
+  <string name="setting_local_tools_all_tools">All Tools</string>
+  <string name="setting_local_tools_enabled">enabled</string>
+  <string name="setting_local_tools_disabled">disabled</string>
+  <string name="setting_local_tools_tools_enabled">tools enabled</string>
+  <string name="setting_local_tools_per_assistant">Configure Per Assistant</string>
+  <string name="setting_integration_title">Integrations</string>
+  <string name="setting_integration_desc">Configure third-party integrations</string>
+  <string name="setting_integration_amap">Amap (高德地图) API</string>
+  <string name="setting_integration_amap_desc">Configure your Amap Web API key for location services (geocoding, POI search, directions). Get a key at https://lbs.amap.com/</string>
+  <string name="setting_integration_amap_key_label">API Key</string>
+  <string name="setting_integration_health">Health Data</string>
+  <string name="setting_integration_health_desc">Configure the path to your Gadgetbridge database for health data access</string>
+  <string name="setting_integration_health_path_label">Database File Path</string>
+  <string name="setting_integration_supabase">Supabase</string>
+  <string name="setting_integration_supabase_desc">Configure Supabase for cloud data sync</string>
+  <string name="setting_integration_supabase_url_label">Project URL</string>
+  <string name="setting_integration_supabase_key_label">Anon Key</string>
+  <string name="setting_integration_save">Save</string>
+  <!-- Updated About page -->
+  <string name="about_page_fork_name">RikkaHub (SlightNeko Fork)</string>
+  <string name="about_page_fork_desc">A fork with extended local tools and system features</string>
+  <string name="about_page_fork_github">Fork source code</string>
 </resources>
 

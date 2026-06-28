@@ -58,10 +58,13 @@ import me.rerere.hugeicons.stroke.LookTop
 import me.rerere.hugeicons.stroke.McpServer
 import me.rerere.hugeicons.stroke.Megaphone01
 import me.rerere.hugeicons.stroke.Package
+import me.rerere.hugeicons.stroke.PlugConnected
 import me.rerere.hugeicons.stroke.ServerStack01
 import me.rerere.hugeicons.stroke.Settings03
 import me.rerere.hugeicons.stroke.Share04
+import me.rerere.hugeicons.stroke.Shield01
 import me.rerere.hugeicons.stroke.Sun01
+import me.rerere.hugeicons.stroke.Tools
 import me.rerere.hugeicons.stroke.WavingHand01
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.Screen
@@ -198,6 +201,24 @@ fun SettingPage(vm: SettingVM = koinViewModel()) {
                         leadingContent = { Icon(HugeIcons.Package, null) },
                         supportingContent = { Text(stringResource(R.string.setting_page_extensions_desc)) },
                         headlineContent = { Text(stringResource(R.string.setting_page_extensions)) },
+                    )
+                    item(
+                        onClick = { navController.navigate(Screen.SettingPermission) },
+                        leadingContent = { Icon(HugeIcons.Shield01, null) },
+                        supportingContent = { Text(stringResource(R.string.setting_page_permission_desc)) },
+                        headlineContent = { Text(stringResource(R.string.setting_page_permission)) },
+                    )
+                    item(
+                        onClick = { navController.navigate(Screen.SettingLocalTools) },
+                        leadingContent = { Icon(HugeIcons.Tools, null) },
+                        supportingContent = { Text(stringResource(R.string.setting_page_local_tools_desc)) },
+                        headlineContent = { Text(stringResource(R.string.setting_page_local_tools)) },
+                    )
+                    item(
+                        onClick = { navController.navigate(Screen.SettingIntegration) },
+                        leadingContent = { Icon(HugeIcons.PlugConnected, null) },
+                        supportingContent = { Text(stringResource(R.string.setting_integration_desc)) },
+                        headlineContent = { Text(stringResource(R.string.setting_integration_title)) },
                     )
                 }
             }

@@ -121,6 +121,9 @@ import me.rerere.rikkahub.ui.pages.setting.SettingSearchDetailPage
 import me.rerere.rikkahub.ui.pages.setting.SettingSearchPage
 import me.rerere.rikkahub.ui.pages.setting.SettingSpeechPage
 import me.rerere.rikkahub.ui.pages.setting.SettingWebPage
+import me.rerere.rikkahub.ui.pages.setting.SettingPermissionPage
+import me.rerere.rikkahub.ui.pages.setting.SettingLocalToolsPage
+import me.rerere.rikkahub.ui.pages.setting.SettingIntegrationPage
 import me.rerere.rikkahub.ui.pages.share.handler.ShareHandlerPage
 import me.rerere.rikkahub.ui.pages.stats.StatsPage
 import me.rerere.rikkahub.ui.pages.translator.TranslatorPage
@@ -420,6 +423,18 @@ class RouteActivity : ComponentActivity() {
                                 SettingPreferencesUIPage()
                             }
 
+                            entry<Screen.SettingPermission> {
+                                SettingPermissionPage()
+                            }
+
+                            entry<Screen.SettingLocalTools> {
+                                SettingLocalToolsPage()
+                            }
+
+                            entry<Screen.SettingIntegration> {
+                                SettingIntegrationPage()
+                            }
+
                             entry<Screen.SettingProvider> {
                                 SettingProviderPage()
                             }
@@ -640,6 +655,15 @@ sealed interface Screen : NavKey {
 
     @Serializable
     data object SettingPreferencesUI : Screen
+
+    @Serializable
+    data object SettingPermission : Screen
+
+    @Serializable
+    data object SettingLocalTools : Screen
+
+    @Serializable
+    data object SettingIntegration : Screen
 
     @Serializable
     data object SettingProvider : Screen
