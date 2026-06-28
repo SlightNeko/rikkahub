@@ -2,12 +2,9 @@
   <img src="docs/icon.png" alt="App 图标" width="100" />
   <h1>NekoHub</h1>
 
-一个原生Android LLM 聊天客户端，支持切换不同的供应商进行聊天 🤖💬
+Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 扩展了系统级 AI 工具。
 
 [English](README.md) | [繁體中文](README_ZH_TW.md) | 简体中文
-
-点击链接加入群聊 👉 [【NekoHub】](https://qm.qq.com/q/I8MSU0FkOu)
-
 </div>
 
 <div align="center">
@@ -15,75 +12,63 @@
   <img src="docs/img/desktop.png" alt="Models Picker" width="450" />
 </div>
 
-
 ## 🚀 下载
 
-🔗 [前往官网下载](https://rikka-ai.com/download)（推荐）
-🔗 [前往 Google Play 下载](https://play.google.com/store/apps/details?id=me.rerere.rikkahub)
+🔗 [下载 Debug APK](https://github.com/SlightNeko/rikkahub/actions) — 最新 CI 构建产物
 
+此为 Fork 版本，未上架 Google Play。
 
-## 💖 赞助商
+## ✨ 新增功能（Fork 特性）
 
-|                                         赞助商                                         | 介绍                                                                                                                                              |
-|:-----------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="docs/sponsors/aihubmix.png" alt="Aihubmix" width="50" /><br /><b>Aihubmix</b> | 感谢 <a href="https://aihubmix.com?aff=pG7r">aihubmix.com</a> 的资金支持。我们推荐使用 aihubmix 作为全球主流模型的一站式服务平台。（OpenAI、Claude、Google Gemini、DeepSeek、Qwen 以及数百种其他模型）。 |
-| <img src="docs/sponsors/suixiang.jpg" alt="随想AI网关" width="50" /><br /><b>随想AI网关</b> | 感谢随想AI网关对本项目的赞助！随想AI网关 是一家可靠高效的 API 中继服务提供商，提供 Claude、Codex、Gemini 等的中继服务。注重隐私的中转站·无数据倒卖·无模型掺水，隐私，透明，极速售后。新账户注册每日签到就送 0.5 元测试额度，充值额度 1:1，无需订阅，按量付费。多线路冗余、跨区域容灾、自动故障切换，长链路 SSE 不中断。99.9% 可用性，关键调用从不掉队。 |
+本 Fork 新增了 20+ 本地系统工具，让 AI 助手能与你的 Android 设备交互：
 
-## ✨ 功能特色
+| 类别 | 工具 |
+|----------|-------|
+| 📷 **媒体** | 相机（静音拍照）、音乐控制 |
+| 📍 **位置** | GPS、附近 POI（高德）、位置追踪 |
+| 📅 **日程** | 日历、闹钟、时间信息 |
+| 📱 **设备** | 电池、屏幕时间、应用使用轨迹、屏幕事件、剪贴板 |
+| 💬 **通信** | 短信、通知监听、主动消息 |
+| 💪 **健康** | Gadgetbridge 健康数据 |
+| ☁️ **同步** | Supabase 云端同步 |
+| ⚙️ **设置** | 权限管理、集成配置（高德 API Key、健康数据库、Supabase） |
 
-- 🎨 现代化安卓APP设计（Material You / 预测性返回）和 🌙 暗色模式
+### 设置新增
+- **权限** — 一站式查看和授权所有应用权限
+- **本地工具** — 浏览所有可用的系统工具
+- **集成** — 配置高德 API Key、Gadgetbridge 数据库路径、Supabase 凭据
+
+## ✨ 功能特色（来自原版 RikkaHub）
+
+- 🎨 Material You 设计和 🌙 暗色模式
 - 📦 工作区：基于 proot 的 Linux 智能体环境
-- 🖥️ Web多端访问支持
-- 🛠️ MCP 支持
-- 🔄 多种类型的供应商支持，自定义 API / URL / 模型（目前支持 OpenAI、Google、Anthropic）
+- 🔄 多种 AI 供应商支持
 - 🖼️ 多模态输入支持
-- 📝 Markdown 渲染（支持代码高亮、数学公式、表格、Mermaid）
-- 🔍 搜索功能（Exa、Tavily、Zhipu、LinkUp、Brave、Perplexity、..）
-- 🧩 Prompt 变量（模型名称、时间等）
-- 🤳 二维码导出和导入提供商
+- 🖥️ Web 多端访问
+- 🛠️ MCP 支持
+- 📝 Markdown 渲染
+- 🪾 消息分支
+- 🔍 搜索功能
+- 🧩 Prompt 变量
+- 🤳 二维码配置分享
 - 🤖 智能体自定义
-- 🧠 类ChatGPT记忆功能
-- 📝 AI翻译
-- 🌐 自定义HTTP请求头和请求体
+- 🧠 类 ChatGPT 记忆
+- 📝 AI 翻译
 
-## ✨ 贡献
+## 🔧 构建
 
-本项目使用[Android Studio](https://developer.android.com/studio)开发，欢迎提交PR
+Fork 自 [re-ovo/rikkahub](https://github.com/re-ovo/rikkahub)。详见 [AGENTS.md](CLAUDE.md)。
 
-技术栈文档:
+```bash
+# 克隆
+git clone https://github.com/SlightNeko/rikkahub.git
+```
 
-- [Kotlin](https://kotlinlang.org/) (开发语言)
-- [Koin](https://insert-koin.io/) (依赖注入)
-- [Jetpack Compose](https://developer.android.com/jetpack/compose) (UI 框架)
-- [DataStore](https://developer.android.com/topic/libraries/architecture/datastore?hl=zh-cn#preferences-datastore) (
-  偏好数据存储)
-- [Room](https://developer.android.com/training/data-storage/room) (数据库)
-- [Coil](https://coil-kt.github.io/coil/) (图片加载)
-- [Material You](https://m3.material.io/) (UI 设计)
-- [Navigation 3](https://developer.android.com/guide/navigation/navigation-3) (导航)
-- [Okhttp](https://square.github.io/okhttp/) (HTTP 客户端)
-- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) (Json序列化)
+推送至 master 分支后通过 GitHub Actions 自动构建。
 
 > [!TIP]
-> 你需要在 `app` 文件夹下添加 `google-services.json` 文件才能构建应用。
-
-> [!IMPORTANT]  
-> 以下PR将被拒绝：
-> 1. 添加新语言，因为添加新语言会增加后续本地化的工作量
-> 2. 添加新功能，这个项目是有态度的
-> 3. AI生成的大规模重构和更改
-
-## 💰 捐赠
-
-* [Patreon](https://patreon.com/rikkahub)
-* [爱发电](https://afdian.com/a/reovo)
-
-## ⭐ Star History
-
-如果喜欢这个项目，请给个Star ⭐
-
-[![Star History Chart](https://api.star-history.com/svg?repos=re-ovo/rikkahub&type=Date)](https://star-history.com/#re-ovo/rikkahub&Date)
+> 需要在 `app` 文件夹下放置 `google-services.json` 文件以使用 Firebase。CI 会创建一个占位文件。
 
 ## 📄 许可证
 
-[License](LICENSE)
+与上游一致：[AGPL v3.0](LICENSE)
