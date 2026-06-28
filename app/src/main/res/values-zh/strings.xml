@@ -449,7 +449,7 @@
   <string name="notification_web_server_starting">正在启动...</string>
   <string name="notification_web_server_stop">停止</string>
   <string name="permission_camera">相机</string>
-  <string name="permission_camera_desc">需要相机权限以拍摄照片</string>
+  <string name="permission_camera_desc">静默拍照，让AI分析周围视觉信息</string>
   <string name="permission_desc_goto_setting">某些权限已被永久拒绝，请前往应用设置手动开启：</string>
   <string name="permission_desc_require_permission">为了提供更好的用户体验，应用需要以下权限：</string>
   <string name="permission_diaog_title">权限请求</string>

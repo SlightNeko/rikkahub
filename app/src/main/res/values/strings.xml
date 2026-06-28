@@ -450,7 +450,7 @@
   <string name="notification_web_server_starting">Starting...</string>
   <string name="notification_web_server_stop">Stop</string>
   <string name="permission_camera">Camera</string>
-  <string name="permission_camera_desc">Camera permission is required to take photos</string>
+  <string name="permission_camera_desc">Take photos silently so the AI can analyze visual information</string>
   <string name="permission_desc_goto_setting">Some permissions have been permanently denied, please go to the app settings to manually enable them:</string>
   <string name="permission_desc_require_permission">In order to provide a better user experience, the app requires the following permissions:</string>
   <string name="permission_diaog_title">Permission Request</string>
