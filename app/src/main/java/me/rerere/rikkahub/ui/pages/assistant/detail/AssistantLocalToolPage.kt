@@ -19,6 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import android.content.Intent
+import android.os.Build
+import android.provider.Settings
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dokar.sonner.ToastType
@@ -124,6 +127,18 @@ private fun AssistantLocalToolContent(
     )
     PermissionManager(permissionState = smsPermissionState)
 
+    val cameraPermissionState = rememberPermissionState(
+        permissions = setOf(
+            PermissionInfo(
+                permission = Manifest.permission.CAMERA,
+                displayName = { Text(stringResource(R.string.permission_camera)) },
+                usage = { Text(stringResource(R.string.permission_camera_desc)) },
+                required = true
+            ),
+        )
+    )
+    PermissionManager(permissionState = cameraPermissionState)
+
     fun toggleLocalTool(option: LocalToolOption, enabled: Boolean) {
         if (enabled && option == LocalToolOption.ScreenTime && !context.hasUsageStatsPermission()) {
             toaster.show(message = permissionRequiredText, type = ToastType.Warning)
@@ -139,6 +154,31 @@ private fun AssistantLocalToolContent(
         }
         if (enabled && option == LocalToolOption.Sms && !smsPermissionState.allPermissionsGranted) {
             smsPermissionState.requestPermissions()
+            return
+        }
+        if (enabled && option == LocalToolOption.Camera && !cameraPermissionState.allPermissionsGranted) {
+            cameraPermissionState.requestPermissions()
+            return
+        }
+        if (enabled && option == LocalToolOption.Alarm) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val alarmManager = context.getSystemService(android.app.AlarmManager::class.java)
+                if (!alarmManager.canScheduleExactAlarms()) {
+                    toaster.show(
+                        message = stringResource(R.string.assistant_page_local_tools_alarm_permission_required),
+                        type = ToastType.Warning
+                    )
+                    context.startActivity(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM))
+                    return
+                }
+            }
+        }
+        if (enabled && option == LocalToolOption.Notification) {
+            toaster.show(
+                message = stringResource(R.string.assistant_page_local_tools_notification_permission_required),
+                type = ToastType.Info
+            )
+            context.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
             return
         }
         val newLocalTools = if (enabled) {

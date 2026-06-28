@@ -1,13 +1,12 @@
 package me.rerere.rikkahub.data.ai.tools.local
 
-import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.media.session.MediaController
 import android.media.session.MediaSessionManager
 import android.media.session.PlaybackState
-import android.os.Build
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
@@ -16,8 +15,6 @@ import kotlinx.serialization.json.put
 import me.rerere.ai.core.InputSchema
 import me.rerere.ai.core.Tool
 import me.rerere.ai.ui.UIMessagePart
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
 
 /**
  * Control media playback and get current music information.
@@ -40,8 +37,14 @@ internal fun buildMusicControlTool(context: Context): Tool = Tool(
             properties = buildJsonObject {
                 put("action", buildJsonObject {
                     put("type", "string")
-                    put("enum", buildJsonObject {
-                        // can't use buildJsonArray at import time; described inline
+                    put("enum", buildJsonArray {
+                        add("info")
+                        add("play")
+                        add("pause")
+                        add("toggle")
+                        add("next")
+                        add("previous")
+                        add("seek_to")
                     })
                     put("description", "Action: 'info' (get current track info, default), 'play', 'pause', 'toggle', 'next', 'previous', 'seek_to' (needs position_ms).")
                 })

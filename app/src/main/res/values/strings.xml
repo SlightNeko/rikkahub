@@ -1276,6 +1276,8 @@
   <string name="permission_notification_listener_desc">Read notifications to let the AI stay aware of your incoming messages</string>
   <string name="permission_sms">SMS</string>
   <string name="permission_sms_desc">Read SMS messages so the AI can help you manage your inbox</string>
+  <string name="permission_camera">Camera</string>
+  <string name="permission_camera_desc">Take photos silently so the AI can analyze visual information</string>
   <string name="assistant_page_local_tools_nearby_poi_title">Nearby Places</string>
   <string name="assistant_page_local_tools_nearby_poi_desc">Let the AI search for nearby restaurants, shops, and attractions via Amap</string>
   <string name="chat_message_tool_nearby_poi">Search nearby POIs</string>
@@ -1306,5 +1308,7 @@
   <string name="assistant_page_local_tools_supabase_title">Supabase Sync</string>
   <string name="assistant_page_local_tools_supabase_desc">Sync data to Supabase cloud database for persistence and cross-device access</string>
   <string name="chat_message_tool_supabase">Supabase sync</string>
+  <string name="assistant_page_local_tools_alarm_permission_required">Precise alarm permission is required. Please grant \"Alarms & reminers\" access on the next screen.</string>
+  <string name="assistant_page_local_tools_notification_permission_required">Notification listener permission is required. Please enable RikkaHub on the next screen.</string>
 </resources>
 
