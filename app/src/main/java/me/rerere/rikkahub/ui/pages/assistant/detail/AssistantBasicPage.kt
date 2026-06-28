@@ -194,7 +194,9 @@ internal fun AssistantBasicContent(
                     onOptionSelected = { workspace ->
                         onUpdate(
                             assistant.copy(
-                                workspaceId = workspace?.id?.let { Uuid.parse(it) }
+                                workspaceId = workspace?.id?.let {
+                                    try { Uuid.parse(it) } catch (e: IllegalArgumentException) { null }
+                                }
                             )
                         )
                     },

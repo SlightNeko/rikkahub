@@ -37,14 +37,24 @@ class AssistantDetailVM(
     private val skillManager: SkillManager,
     private val workspaceRepository: WorkspaceRepository,
 ) : ViewModel() {
-    private val assistantId = Uuid.parse(id)
+    private val assistantId = try {
+        Uuid.parse(id)
+    } catch (e: IllegalArgumentException) {
+        Log.e(TAG, "Invalid UUID: $id, using fallback", e)
+        Uuid.NIL
+    }
 
     private val _skills = MutableStateFlow<List<SkillMetadata>>(emptyList())
     val skills = _skills.asStateFlow()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _skills.value = skillManager.listSkills()
+            try {
+                _skills.value = skillManager.listSkills()
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to load skills", e)
+                _skills.value = emptyList()
+            }
         }
     }
 

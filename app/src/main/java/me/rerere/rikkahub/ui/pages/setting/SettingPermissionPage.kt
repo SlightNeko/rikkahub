@@ -2,9 +2,12 @@ package me.rerere.rikkahub.ui.pages.setting
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,10 +24,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeFlexibleTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,6 +52,14 @@ fun SettingPermissionPage() {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
 
+    // Permission request launcher
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { _ -> /* state refreshes via key update below */ }
+    
+    var refreshKey by remember { mutableStateOf(0) }
+    fun refresh() { refreshKey++ }
+
     Scaffold(
         topBar = {
             LargeFlexibleTopAppBar(
@@ -61,57 +75,89 @@ fun SettingPermissionPage() {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = innerPadding + PaddingValues(8.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            key = refreshKey
         ) {
             item {
-                PermissionGroupCard(
-                    title = stringResource(R.string.setting_permission_essential),
-                    items = listOf(
-                        Triple(stringResource(R.string.permission_camera), stringResource(R.string.permission_camera_desc), Manifest.permission.CAMERA),
-                        Triple(stringResource(R.string.permission_calendar_read), stringResource(R.string.permission_calendar_read_desc), Manifest.permission.READ_CALENDAR),
-                        Triple(stringResource(R.string.permission_calendar_write), stringResource(R.string.permission_calendar_write_desc), Manifest.permission.WRITE_CALENDAR),
-                        Triple(stringResource(R.string.permission_location), stringResource(R.string.permission_location_desc), Manifest.permission.ACCESS_FINE_LOCATION),
-                    )
-                )
+                Card(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
+                    Column(modifier = Modifier.padding(12.dp)) {
+                        Text(
+                            text = stringResource(R.string.setting_permission_essential),
+                            style = MaterialTheme.typography.titleSmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        PermissionItem(
+                            label = stringResource(R.string.permission_camera),
+                            desc = stringResource(R.string.permission_camera_desc),
+                            granted = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED,
+                            onClick = { permissionLauncher.launch(Manifest.permission.CAMERA); refresh() }
+                        )
+                        PermissionItem(
+                            label = stringResource(R.string.permission_calendar_read),
+                            desc = stringResource(R.string.permission_calendar_read_desc),
+                            granted = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED,
+                            onClick = { permissionLauncher.launch(Manifest.permission.READ_CALENDAR); refresh() }
+                        )
+                        PermissionItem(
+                            label = stringResource(R.string.permission_calendar_write),
+                            desc = stringResource(R.string.permission_calendar_write_desc),
+                            granted = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED,
+                            onClick = { permissionLauncher.launch(Manifest.permission.WRITE_CALENDAR); refresh() }
+                        )
+                        PermissionItem(
+                            label = stringResource(R.string.permission_location),
+                            desc = stringResource(R.string.permission_location_desc),
+                            granted = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED,
+                            onClick = { permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION); refresh() }
+                        )
+                    }
+                }
             }
 
             item {
-                PermissionGroupCard(
-                    title = stringResource(R.string.setting_permission_communication),
-                    items = listOf(
-                        Triple(stringResource(R.string.permission_sms), stringResource(R.string.permission_sms_desc), Manifest.permission.READ_SMS),
-                    )
-                )
+                Card(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
+                    Column(modifier = Modifier.padding(12.dp)) {
+                        Text(
+                            text = stringResource(R.string.setting_permission_communication),
+                            style = MaterialTheme.typography.titleSmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        PermissionItem(
+                            label = stringResource(R.string.permission_sms),
+                            desc = stringResource(R.string.permission_sms_desc),
+                            granted = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED,
+                            onClick = { permissionLauncher.launch(Manifest.permission.READ_SMS); refresh() }
+                        )
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            PermissionItem(
+                                label = stringResource(R.string.permission_notification),
+                                desc = stringResource(R.string.permission_notification_desc),
+                                granted = ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED,
+                                onClick = { permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS); refresh() }
+                            )
+                        }
+                    }
+                }
             }
 
-            // Special permissions that require system settings
+            // Special permissions
             item {
                 val alarmGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    val am = context.getSystemService(android.app.AlarmManager::class.java)
-                    am.canScheduleExactAlarms()
+                    context.getSystemService(android.app.AlarmManager::class.java).canScheduleExactAlarms()
                 } else true
 
-                val notifGranted = run {
-                    val listeners = Settings.Secure.getString(
-                        context.contentResolver, "enabled_notification_listeners"
-                    )
-                    listeners?.contains(context.packageName) == true
-                }
+                val notifGranted = Settings.Secure.getString(
+                    context.contentResolver, "enabled_notification_listeners"
+                )?.contains(context.packageName) == true
 
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp)
-                ) {
+                Card(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         Text(
                             text = stringResource(R.string.setting_permission_special),
                             style = MaterialTheme.typography.titleSmall,
                             color = MaterialTheme.colorScheme.primary
                         )
-
-                        // Alarm
-                        PermissionRow(
+                        PermissionItem(
                             label = stringResource(R.string.permission_alarm),
                             desc = stringResource(R.string.assistant_page_local_tools_alarm_permission_required),
                             granted = alarmGranted,
@@ -121,9 +167,7 @@ fun SettingPermissionPage() {
                                 }
                             }
                         )
-
-                        // Notification Listener
-                        PermissionRow(
+                        PermissionItem(
                             label = stringResource(R.string.permission_notification_listener),
                             desc = stringResource(R.string.assistant_page_local_tools_notification_permission_required),
                             granted = notifGranted,
@@ -137,9 +181,7 @@ fun SettingPermissionPage() {
 
             item {
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
                     )
@@ -158,43 +200,7 @@ fun SettingPermissionPage() {
 }
 
 @Composable
-private fun PermissionGroupCard(
-    title: String,
-    items: List<Triple<String, String, String>>
-) {
-    val context = LocalContext.current
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 8.dp)
-    ) {
-        Column(modifier = Modifier.padding(12.dp)) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary
-            )
-            items.forEach { (label, desc, permission) ->
-                val granted = ContextCompat.checkSelfPermission(context, permission) ==
-                        android.content.pm.PackageManager.PERMISSION_GRANTED
-                PermissionRow(
-                    label = label,
-                    desc = desc,
-                    granted = granted,
-                    onClick = {
-                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                            data = Uri.fromParts("package", context.packageName, null)
-                        }
-                        context.startActivity(intent)
-                    }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun PermissionRow(
+private fun PermissionItem(
     label: String,
     desc: String,
     granted: Boolean,
@@ -218,10 +224,7 @@ private fun PermissionRow(
                 .weight(1f)
                 .padding(horizontal = 12.dp)
         ) {
-            Text(
-                text = label,
-                style = MaterialTheme.typography.bodyMedium
-            )
+            Text(text = label, style = MaterialTheme.typography.bodyMedium)
             Text(
                 text = desc,
                 style = MaterialTheme.typography.bodySmall,
