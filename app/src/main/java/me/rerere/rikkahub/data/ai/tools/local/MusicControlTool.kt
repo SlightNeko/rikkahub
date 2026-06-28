@@ -142,41 +142,13 @@ internal fun buildMusicControlTool(context: Context): Tool = Tool(
  */
 private fun getActiveMediaController(context: Context): MediaController? {
     val mediaSessionManager = context.getSystemService(Context.MEDIA_SESSION_SERVICE) as MediaSessionManager
-
     val componentName = ComponentName(context, NotificationCaptureService::class.java)
-    val notificationIntent = Intent().setComponent(componentName)
 
-    // We don't have PendingIntent access to bind, so use a simpler approach:
-    // query active media sessions
-    var controller: MediaController? = null
-    val latch = CountDownLatch(1)
-
-    val sessions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-        android.media.session.MediaSessionManager.RemoteSessionCallback { sessions ->
-            controller = sessions.firstOrNull()?.let { token ->
-                try {
-                    MediaController(context, token)
-                } catch (e: Exception) {
-                    null
-                }
-            }
-            latch.countDown()
-        }.let { callback ->
-            mediaSessionManager.registerRemoteSessionCallback({ command -> command.run() }, callback)
-            latch.await(2, TimeUnit.SECONDS)
-            mediaSessionManager.unregisterRemoteSessionCallback(callback)
-            controller
-        }
-    } else {
-        @Suppress("DEPRECATION")
-        val activeSessions = mediaSessionManager.getActiveSessions(componentName)
-        controller = activeSessions.firstOrNull()?.let { ctrl ->
-            MediaController(context, ctrl.sessionToken)
-        }
-        controller
+    @Suppress("DEPRECATION")
+    val activeSessions = mediaSessionManager.getActiveSessions(componentName)
+    return activeSessions.firstOrNull()?.let { ctrl ->
+        MediaController(context, ctrl.sessionToken)
     }
-
-    return controller
 }
 
 private fun stateToString(state: Int): String = when (state) {

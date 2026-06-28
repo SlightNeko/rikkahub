@@ -137,7 +137,7 @@ class ProactiveMessageReceiver : BroadcastReceiver() {
  * In-memory event cache for proactive message triggers.
  */
 object ProactiveMessageEventCache {
-    private data class Event(val timestampMs: Long, val note: String)
+    internal data class Event(val timestampMs: Long, val note: String)
 
     private val events = java.util.concurrent.ConcurrentLinkedQueue<Event>()
     private const val MAX = 50
