@@ -147,7 +147,7 @@ object ProactiveMessageEventCache {
         while (events.size > MAX) events.poll()
     }
 
-    fun recent(limit: Int): List<Event> =
+    internal fun recent(limit: Int): List<Event> =
         events.toList().sortedByDescending { it.timestampMs }.take(limit)
 }
 

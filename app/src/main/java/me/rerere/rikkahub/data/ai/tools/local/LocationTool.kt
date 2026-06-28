@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import androidx.core.content.ContextCompat
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
@@ -92,7 +93,7 @@ internal fun buildLocationTool(context: Context, eventBus: me.rerere.rikkahub.da
             put("provider", location.provider ?: "unknown")
             put("timestamp", location.time)
             if (addressJson != null) {
-                put("address", addressJson)
+                put("address", Json.parseToJsonElement(addressJson.toString()))
             } else {
                 put("address_note", "Amap API key not configured. Set it in app settings for address lookup.")
             }
