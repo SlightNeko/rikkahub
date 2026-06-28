@@ -1318,12 +1318,7 @@
   <string name="setting_permission_communication">Communication</string>
   <string name="setting_permission_special">Special Permissions</string>
   <string name="setting_permission_tip">Tap any item to open system settings and change permissions.</string>
-  <string name="permission_location">Location</string>
-  <string name="permission_location_desc">Access precise location for weather, POI, and location-aware features</string>
-  <string name="permission_sms">SMS</string>
-  <string name="permission_sms_desc">Read SMS messages so the AI can help manage your messages</string>
   <string name="permission_alarm">Alarm</string>
-  <string name="permission_notification_listener">Notification Listener</string>
   <string name="permission_status_granted">Granted</string>
   <string name="permission_status_denied">Denied</string>
   <!-- Local Tools Quick Access -->
