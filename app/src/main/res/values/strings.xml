@@ -6,6 +6,8 @@
   <string name="about_page_title">About</string>
   <string name="about_page_version">Version</string>
   <string name="about_page_website">Website</string>
+  <string name="about_page_disclaimer">⚠️ Important Notice</string>
+  <string name="about_page_disclaimer_text">This is an unofficial fork of RikkaHub (NekoHub). Please DO NOT report any issues or bugs to the original RikkaHub project or its developers. If you encounter problems, please open an issue at github.com/SlightNeko/rikkahub instead.</string>
   <string name="add">Add</string>
   <string name="app_name">NekoHub</string>
   <string name="asr_button_content_description">Speech Recognition</string>
@@ -872,7 +874,7 @@
   <string name="setting_page_search_title">Search Service</string>
   <string name="setting_page_share">Share</string>
   <string name="setting_page_share_desc">Share this app with friends</string>
-  <string name="setting_page_share_text">NekoHub - Open Source Android AI Assistant\n\nWebsite: https://rikka-ai.com/</string>
+  <string name="setting_page_share_text">NekoHub - Open Source Android AI Assistant\n\nWebsite: https://github.com/SlightNeko/rikkahub</string>
   <string name="setting_page_sponsor_alert_confirm">Donate</string>
   <string name="setting_page_sponsor_alert_desc">You have launched the app over 100 times! If you enjoy using it, please consider supporting the developer.</string>
   <string name="setting_page_sponsor_alert_dismiss">Not Now</string>

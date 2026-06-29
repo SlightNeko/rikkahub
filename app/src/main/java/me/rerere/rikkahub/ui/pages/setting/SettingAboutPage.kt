@@ -1,6 +1,7 @@
 package me.rerere.rikkahub.ui.pages.setting
 
 import me.rerere.hugeicons.HugeIcons
+import me.rerere.hugeicons.stroke.Alert01
 import me.rerere.hugeicons.stroke.Code
 import me.rerere.hugeicons.stroke.Earth
 import me.rerere.hugeicons.stroke.File02
@@ -162,9 +163,9 @@ fun SettingAboutPage() {
                         modifier = Modifier.padding(horizontal = 8.dp),
                     ) {
                         item(
-                            onClick = { context.openUrl("https://rikka-ai.com/") },
+                            onClick = { context.openUrl("https://github.com/SlightNeko/rikkahub") },
                             leadingContent = { Icon(HugeIcons.Earth, null) },
-                            supportingContent = { Text("https://rikka-ai.com") },
+                            supportingContent = { Text("github.com/SlightNeko/rikkahub") },
                             headlineContent = { Text(stringResource(R.string.about_page_website)) },
                         )
                         item(
@@ -174,10 +175,22 @@ fun SettingAboutPage() {
                             headlineContent = { Text("github.com/SlightNeko/rikkahub") },
                         )
                         item(
-                            onClick = { context.openUrl("https://github.com/rikkahub/rikkahub/blob/master/LICENSE") },
+                            onClick = { context.openUrl("https://github.com/SlightNeko/rikkahub/blob/master/LICENSE") },
                             leadingContent = { Icon(HugeIcons.File02, null) },
-                            supportingContent = { Text("https://github.com/rikkahub/rikkahub/blob/master/LICENSE") },
+                            supportingContent = { Text("github.com/SlightNeko/rikkahub/blob/master/LICENSE") },
                             headlineContent = { Text(stringResource(R.string.about_page_license)) },
+                        )
+                    }
+                }
+
+                item {
+                    CardGroup(
+                        modifier = Modifier.padding(horizontal = 8.dp),
+                    ) {
+                        item(
+                            leadingContent = { Icon(HugeIcons.Alert01, null, tint = MaterialTheme.colorScheme.error) },
+                            headlineContent = { Text(stringResource(R.string.about_page_disclaimer)) },
+                            supportingContent = { Text(stringResource(R.string.about_page_disclaimer_text)) },
                         )
                     }
                 }

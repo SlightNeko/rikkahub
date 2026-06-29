@@ -169,8 +169,13 @@ fun UpdateCard(vm: ChatVM) {
                                     )
                                 },
                                 supportingContent = {
+                                    val sizeText = when {
+                                        downloadItem.size < 1024 -> "${downloadItem.size} B"
+                                        downloadItem.size < 1024 * 1024 -> "${"%.1f".format(downloadItem.size / 1024.0)} KB"
+                                        else -> "${"%.1f".format(downloadItem.size / (1024.0 * 1024.0))} MB"
+                                    }
                                     Text(
-                                        text = downloadItem.size
+                                        text = sizeText
                                     )
                                 },
                                 leadingContent = {

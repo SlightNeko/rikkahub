@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import me.rerere.common.http.await
@@ -17,7 +18,7 @@ import me.rerere.rikkahub.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
-private const val API_URL = "https://updates.rikka-ai.com/"
+private const val API_URL = "https://api.github.com/repos/SlightNeko/rikkahub/releases/latest"
 
 class UpdateChecker(private val client: OkHttpClient) {
     private val json = Json { ignoreUnknownKeys = true }
@@ -79,16 +80,23 @@ class UpdateChecker(private val client: OkHttpClient) {
 
 @Serializable
 data class UpdateDownload(
+    @SerialName("name")
     val name: String,
+    @SerialName("browser_download_url")
     val url: String,
-    val size: String
+    @SerialName("size")
+    val size: Long
 )
 
 @Serializable
 data class UpdateInfo(
+    @SerialName("tag_name")
     val version: String,
+    @SerialName("published_at")
     val publishedAt: String,
+    @SerialName("body")
     val changelog: String,
+    @SerialName("assets")
     val downloads: List<UpdateDownload>
 )
 
