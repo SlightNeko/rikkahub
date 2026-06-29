@@ -80,11 +80,11 @@ fun UpdateCard(vm: ChatVM) {
     state.onSuccess { info ->
         var showDetail by remember { mutableStateOf(false) }
         var dismissed by remember { mutableStateOf(false) }
-        val currentCode = remember { 
-            BuildConfig.VERSION_NAME.split(".").getOrElse(3) { "0" }.toIntOrNull() ?: 0
-        }
+        val currentCode = remember { BuildConfig.VERSION_CODE }
         val latestCode = remember(info) {
-            info.version.split(".").getOrElse(3) { "0" }.toIntOrNull() ?: 0
+            // Parse versionCode from release body: "VersionCode: 180"
+            Regex("VersionCode:\\s*(\\d+)").find(info.changelog)?.groupValues?.get(1)?.toIntOrNull()
+                ?: info.version.split(".").getOrElse(3) { "0" }.toIntOrNull() ?: 0
         }
         if (latestCode > currentCode && !dismissed) {
             Card(

@@ -98,8 +98,10 @@ jobs:
       - name: Get version
         id: version
         run: |
-          VNAME=$(grep 'versionName' app/build.gradle.kts | head -1 | sed 's/.*"\(.*\)".*/\1/')
+          VNAME=$(grep '^\s*versionName' app/build.gradle.kts | head -1 | sed 's/.*"\(.*\)".*/\1/')
           echo "name=$VNAME" >> $GITHUB_OUTPUT
+          VCODE=$(grep '^\s*versionCode' app/build.gradle.kts | head -1 | grep -o '[0-9]\+')
+          echo "code=$VCODE" >> $GITHUB_OUTPUT
 
       - name: Find APK
         id: apk
@@ -116,6 +118,8 @@ jobs:
           tag_name: "v${{ steps.version.outputs.name }}"
           prerelease: false
           generate_release_notes: true
+          body: |
+            VersionCode: ${{ steps.version.outputs.code }}
 
       - name: Send build notification
         if: always()
