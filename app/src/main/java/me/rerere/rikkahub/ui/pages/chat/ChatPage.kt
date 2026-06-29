@@ -297,6 +297,17 @@ private fun ChatPageContent(
 
     TTSAutoPlay(vm = vm, setting = setting, conversation = conversation)
 
+    // Auto-compress toast notification
+    val autoCompressToaster = LocalToaster.current
+    LaunchedEffect(Unit) {
+        vm.autoCompressDoneFlow.collect {
+            autoCompressToaster.show(
+                message = stringResource(R.string.setting_auto_compress_desc),
+                duration = 2000
+            )
+        }
+    }
+
     Surface(
         color = MaterialTheme.colorScheme.background,
         modifier = Modifier.fillMaxSize()

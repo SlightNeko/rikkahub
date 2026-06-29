@@ -190,6 +190,10 @@ class ChatService(
     private val _generationDoneFlow = MutableSharedFlow<Uuid>()
     val generationDoneFlow: SharedFlow<Uuid> = _generationDoneFlow.asSharedFlow()
 
+    // 自动压缩完成流
+    private val _autoCompressDoneFlow = MutableSharedFlow<Uuid>()
+    val autoCompressDoneFlow: SharedFlow<Uuid> = _autoCompressDoneFlow.asSharedFlow()
+
     // 前台状态管理
     private val _isForeground = MutableStateFlow(false)
     val isForeground: StateFlow<Boolean> = _isForeground.asStateFlow()
@@ -651,6 +655,9 @@ class ChatService(
             launchWithConversationReference(conversationId) {
                 generateSuggestion(conversationId, finalConversation)
             }
+            launchWithConversationReference(conversationId) {
+                checkAndAutoCompress(conversationId)
+            }
         }
     }
 
@@ -848,6 +855,53 @@ class ChatService(
     }
 
     // ---- 压缩对话历史 ----
+
+    /**
+     * Check if auto-compression should trigger and perform it if needed.
+     * Should be called after each assistant response completes.
+     */
+    suspend fun checkAndAutoCompress(conversationId: Uuid) {
+        val settings = settingsStore.settingsFlow.first()
+        if (!settings.autoCompressEnabled) return
+
+        val conversation = sessions[conversationId]?.state?.value ?: return
+        val messages = conversation.currentMessages
+        if (messages.isEmpty()) return
+
+        // Count conversation turns (user-assistant pairs as one turn)
+        val turns = messages.count { it.role == MessageRole.USER }
+        val triggerByTurns = turns >= settings.autoCompressTriggerTurns
+
+        // Estimate total tokens (~4 chars per token)
+        val totalChars = messages.sumOf { msg ->
+            msg.parts.sumOf { part ->
+                when (part) {
+                    is me.rerere.ai.ui.UIMessagePart.Text -> part.text.length
+                    is me.rerere.ai.ui.UIMessagePart.Reasoning -> part.reasoning.length
+                    else -> 0
+                }
+            }
+        }
+        val estimatedTokens = totalChars / 4
+        val triggerByTokens = estimatedTokens >= settings.autoCompressTriggerTokens
+
+        if (!triggerByTurns && !triggerByTokens) return
+
+        Log.i(TAG, "Auto-compressing conversation $conversationId: turns=$turns, est_tokens=$estimatedTokens")
+
+        compressConversation(
+            conversationId = conversationId,
+            conversation = conversation,
+            additionalPrompt = settings.autoCompressAdditionalPrompt,
+            targetTokens = settings.autoCompressTargetTokens,
+            keepRecentMessages = settings.autoCompressKeepRecent
+        ).onSuccess {
+            Log.i(TAG, "Auto-compression completed for $conversationId")
+            _autoCompressDoneFlow.emit(conversationId)
+        }.onFailure {
+            Log.w(TAG, "Auto-compression failed for $conversationId: $it")
+        }
+    }
 
     suspend fun compressConversation(
         conversationId: Uuid,

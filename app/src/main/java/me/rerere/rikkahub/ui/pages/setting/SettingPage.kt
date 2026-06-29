@@ -226,6 +226,12 @@ fun SettingPage(vm: SettingVM = koinViewModel()) {
                         supportingContent = { Text(stringResource(R.string.setting_integration_desc)) },
                         headlineContent = { Text(stringResource(R.string.setting_integration_title)) },
                     )
+                    item(
+                        onClick = { navController.navigate(Screen.SettingAutoCompress) },
+                        leadingContent = { Icon(HugeIcons.Book03, null) },
+                        supportingContent = { Text(stringResource(R.string.setting_auto_compress_desc)) },
+                        headlineContent = { Text(stringResource(R.string.setting_auto_compress)) },
+                    )
                 }
             }
 

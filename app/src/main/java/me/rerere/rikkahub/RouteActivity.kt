@@ -125,6 +125,7 @@ import me.rerere.rikkahub.ui.pages.setting.SettingPermissionPage
 import me.rerere.rikkahub.ui.pages.setting.SettingLocalToolsPage
 import me.rerere.rikkahub.ui.pages.setting.SettingProactivePage
 import me.rerere.rikkahub.ui.pages.setting.SettingIntegrationPage
+import me.rerere.rikkahub.ui.pages.setting.SettingAutoCompressPage
 import me.rerere.rikkahub.ui.pages.share.handler.ShareHandlerPage
 import me.rerere.rikkahub.ui.pages.stats.StatsPage
 import me.rerere.rikkahub.ui.pages.translator.TranslatorPage
@@ -440,6 +441,10 @@ class RouteActivity : ComponentActivity() {
                                 SettingIntegrationPage()
                             }
 
+                            entry<Screen.SettingAutoCompress> {
+                                SettingAutoCompressPage()
+                            }
+
                             entry<Screen.SettingProvider> {
                                 SettingProviderPage()
                             }
@@ -672,6 +677,9 @@ sealed interface Screen : NavKey {
 
     @Serializable
     data object SettingIntegration : Screen
+
+    @Serializable
+    data object SettingAutoCompress : Screen
 
     @Serializable
     data object SettingProvider : Screen

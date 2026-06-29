@@ -121,6 +121,9 @@ class ChatVM(
     // 生成完成
     val generationDoneFlow: SharedFlow<Uuid> = chatService.generationDoneFlow
 
+    // 自动压缩完成
+    val autoCompressDoneFlow: SharedFlow<Uuid> = chatService.autoCompressDoneFlow
+
     // MCP管理器
     val mcpManager = chatService.mcpManager
 

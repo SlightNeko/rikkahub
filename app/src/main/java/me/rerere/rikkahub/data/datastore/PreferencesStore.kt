@@ -100,6 +100,14 @@ class SettingsStore(
         val COMPRESS_MODEL = stringPreferencesKey("compress_model")
         val COMPRESS_PROMPT = stringPreferencesKey("compress_prompt")
 
+        // 自动压缩
+        val AUTO_COMPRESS_ENABLED = booleanPreferencesKey("auto_compress_enabled")
+        val AUTO_COMPRESS_TRIGGER_TURNS = intPreferencesKey("auto_compress_trigger_turns")
+        val AUTO_COMPRESS_TRIGGER_TOKENS = intPreferencesKey("auto_compress_trigger_tokens")
+        val AUTO_COMPRESS_TARGET_TOKENS = intPreferencesKey("auto_compress_target_tokens")
+        val AUTO_COMPRESS_KEEP_RECENT = intPreferencesKey("auto_compress_keep_recent")
+        val AUTO_COMPRESS_ADDITIONAL_PROMPT = stringPreferencesKey("auto_compress_additional_prompt")
+
         // 提供商
         val PROVIDERS = stringPreferencesKey("providers")
 
@@ -185,6 +193,12 @@ class SettingsStore(
                 ocrPrompt = preferences[OCR_PROMPT] ?: DEFAULT_OCR_PROMPT,
                 compressModelId = preferences[COMPRESS_MODEL]?.let { Uuid.parse(it) } ?: DEFAULT_AUTO_MODEL_ID,
                 compressPrompt = preferences[COMPRESS_PROMPT] ?: DEFAULT_COMPRESS_PROMPT,
+                autoCompressEnabled = preferences[AUTO_COMPRESS_ENABLED] == true,
+                autoCompressTriggerTurns = preferences[AUTO_COMPRESS_TRIGGER_TURNS] ?: 20,
+                autoCompressTriggerTokens = preferences[AUTO_COMPRESS_TRIGGER_TOKENS] ?: 8000,
+                autoCompressTargetTokens = preferences[AUTO_COMPRESS_TARGET_TOKENS] ?: 3000,
+                autoCompressKeepRecent = preferences[AUTO_COMPRESS_KEEP_RECENT] ?: 5,
+                autoCompressAdditionalPrompt = preferences[AUTO_COMPRESS_ADDITIONAL_PROMPT] ?: "",
                 assistantId = preferences[SELECT_ASSISTANT]?.let { Uuid.parse(it) }
                     ?: DEFAULT_ASSISTANT_ID,
                 assistantTags = preferences[ASSISTANT_TAGS]?.let {
@@ -379,6 +393,13 @@ class SettingsStore(
             preferences[COMPRESS_MODEL] = settings.compressModelId.toString()
             preferences[COMPRESS_PROMPT] = settings.compressPrompt
 
+            preferences[AUTO_COMPRESS_ENABLED] = settings.autoCompressEnabled
+            preferences[AUTO_COMPRESS_TRIGGER_TURNS] = settings.autoCompressTriggerTurns
+            preferences[AUTO_COMPRESS_TRIGGER_TOKENS] = settings.autoCompressTriggerTokens
+            preferences[AUTO_COMPRESS_TARGET_TOKENS] = settings.autoCompressTargetTokens
+            preferences[AUTO_COMPRESS_KEEP_RECENT] = settings.autoCompressKeepRecent
+            preferences[AUTO_COMPRESS_ADDITIONAL_PROMPT] = settings.autoCompressAdditionalPrompt
+
             preferences[PROVIDERS] = JsonInstant.encodeToString(settings.providers)
 
             preferences[ASSISTANTS] = JsonInstant.encodeToString(settings.assistants)
@@ -516,6 +537,12 @@ data class Settings(
     val ocrPrompt: String = DEFAULT_OCR_PROMPT,
     val compressModelId: Uuid = Uuid.random(),
     val compressPrompt: String = DEFAULT_COMPRESS_PROMPT,
+    val autoCompressEnabled: Boolean = false,
+    val autoCompressTriggerTurns: Int = 20,
+    val autoCompressTriggerTokens: Int = 8000,
+    val autoCompressTargetTokens: Int = 3000,
+    val autoCompressKeepRecent: Int = 5,
+    val autoCompressAdditionalPrompt: String = "",
     val assistantId: Uuid = DEFAULT_ASSISTANT_ID,
     val providers: List<ProviderSetting> = DEFAULT_PROVIDERS,
     val assistants: List<Assistant> = DEFAULT_ASSISTANTS,

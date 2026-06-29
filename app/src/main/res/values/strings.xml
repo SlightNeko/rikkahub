@@ -1354,5 +1354,15 @@
   <string name="setting_proactive_enabled">Enable proactive messages</string>
   <string name="setting_proactive_min_desc">Shortest time between messages</string>
   <string name="setting_proactive_max_desc">Longest time between messages</string>
+  <!-- Auto Compress -->
+  <string name="setting_auto_compress">Auto Compress</string>
+  <string name="setting_auto_compress_enabled">Enable auto compression</string>
+  <string name="setting_auto_compress_trigger_turns">Trigger after %d turns</string>
+  <string name="setting_auto_compress_trigger_tokens">Trigger when tokens exceed %d</string>
+  <string name="setting_auto_compress_target_tokens">Target tokens after compression: %d</string>
+  <string name="setting_auto_compress_keep_recent">Keep recent messages: %d</string>
+  <string name="setting_auto_compress_additional_prompt">Additional instructions</string>
+  <string name="setting_auto_compress_desc">Automatically compress conversation history when triggers are met</string>
+  <string name="setting_auto_compress_turns_unit">turns</string>
 </resources>
 
