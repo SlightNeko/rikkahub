@@ -30,26 +30,14 @@ jobs:
           corepack enable
           corepack prepare pnpm@latest --activate
 
-      - name: Generate signing keystore (first time only)
+      - name: Verify signing keystore
         run: |
-          if [ ! -f nekohub.keystore ]; then
-            keytool -genkey -v \
-              -keystore nekohub.keystore \
-              -alias slightNeko \
-              -keyalg RSA -keysize 2048 -validity 10000 \
-              -storepass 'A%p5uLwSu3j#fBw' \
-              -keypass 'A%p5uLwSu3j#fBw' \
-              -dname "CN=SlightNeko, OU=NekoHub, O=NekoHub, L=Unknown, ST=Unknown, C=CN"
+          if [ -f nekohub.keystore ]; then
+            echo "✅ Using committed keystore ($(wc -c < nekohub.keystore) bytes)"
           else
-            echo "Using existing nekohub.keystore"
+            echo "❌ Keystore not found! Committed keystore should be in repo."
+            exit 1
           fi
-
-      - name: Upload keystore as artifact (download & commit to repo)
-        uses: actions/upload-artifact@v4
-        with:
-          name: nekohub-keystore
-          path: nekohub.keystore
-          retention-days: 1
 
       - name: Create google-services.json
         run: |
