@@ -2,8 +2,8 @@
 
 **发布日期**: 2026-06-30  
 **基础版本**: RikkaHub v2.3.4 (上游), v2.4.0 (fork)  
-**当前版本**: `2.4.0-3` (上游 2.4.0 + 第3次修改)  
-**Release**: https://github.com/SlightNeko/rikkahub/releases/tag/v2.4.0-3
+**当前版本**: `2.4.0-5` (上游 2.4.0 + 第5次修改)  
+**Release**: https://github.com/SlightNeko/rikkahub/releases/tag/v2.4.0-5
 
 ---
 
