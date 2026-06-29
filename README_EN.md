@@ -60,38 +60,7 @@ This fork adds 20+ local system tools enabling the AI assistant to interact with
 
 ## 📋 Changelog
 
-### v2.3.4-1 (2026-06-29)
-
-**New Features:**
-- 🤖 **Auto-compress context** — Configurable triggers (turn count / token count); target tokens & keep-recent reuse manual compress defaults; dedicated compress model selector in Default Model page
-- 💬 **Proactive messaging settings** — Toggle + adjustable interval slider (5–1440 min)
-
-**Fork Features:**
-- 🐱 NekoHub custom cat icon (dark mode adapted: white line art)
-- 📷 Silent camera capture, 🎵 Music control
-- 📍 GPS + nearby POI (via Amap API)
-- 📅 Calendar, ⏰ Alarm
-- 📱 Battery, Screen time, App usage
-- 📋 Clipboard, 📩 SMS, 🔔 Notification listener
-- 💪 Gadgetbridge health data
-- ☁️ Supabase cloud sync
-- ⚙️ Permission manager · Local tools catalog · Integration config · Proactive messaging
-
-**Branding & Release:**
-- Full rename to NekoHub (40+ files)
-- Fork-aware about page: official links → fork repo, QQ/Discord hidden, disclaimer (CN/EN)
-- Update checker → GitHub Releases API
-- Share text URLs updated (6 languages + OpenRouter referrer)
-- README restructured: Chinese default, language switcher shows only other languages
-- Permanent signing keystore in repo → consistent APK signature, overwrite install support
-
-**Fixes:**
-- Permission page refresh logic
-- Local tool list icon differentiation (JavaScript vs Supabase)
-- Broken adaptive-icon XML → pure raster mipmaps
-- README self-referencing language labels
-
-> 📦 Upstream version: 2.3.4 | Fork revision: -1
+See [Releases](https://github.com/SlightNeko/rikkahub/releases)
 
 ## 🔧 Building
 
