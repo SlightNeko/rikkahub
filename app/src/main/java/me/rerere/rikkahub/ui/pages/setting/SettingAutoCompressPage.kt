@@ -201,7 +201,7 @@ fun SettingAutoCompressPage(vm: SettingVM = koinViewModel()) {
                         }
                     }
 
-                    // Keep recent messages slider
+                    // Keep recent messages selector (matches manual compress dialog options)
                     item {
                         Column(
                             modifier = Modifier
@@ -218,8 +218,8 @@ fun SettingAutoCompressPage(vm: SettingVM = koinViewModel()) {
                             Slider(
                                 value = keepRecent,
                                 onValueChange = { keepRecent = it },
-                                valueRange = 1f..20f,
-                                steps = 18, // (20-1)/1 - 1 = 18
+                                valueRange = 0f..64f,
+                                steps = 3, // 0, 16, 32, 64 — matches manual dialog
                                 onValueChangeFinished = {
                                     vm.updateSettings(
                                         settings.copy(autoCompressKeepRecent = keepRecent.roundToInt())
