@@ -124,8 +124,15 @@ value class Version(val value: String) : Comparable<Version> {
         } else {
             withoutBuild to null
         }
-        val core = coreStr.split(".").map { it.toIntOrNull() ?: 0 }
-        val prerelease = prereleaseStr?.split(".")
+        val core = coreStr.split(".").map { it.toIntOrNull() ?: 0 }.toMutableList()
+        // NekoHub version convention: 2.4.0-3 means upstream 2.4.0, mod 3
+        // Treat pure-numeric hyphen suffix as a 4th version component, not a SemVer prerelease
+        var prerelease: List<String>? = null
+        if (prereleaseStr != null && prereleaseStr.all { it.isDigit() }) {
+            core.add(prereleaseStr.toInt())
+        } else {
+            prerelease = prereleaseStr?.split(".")
+        }
         return ParsedVersion(core, prerelease)
     }
 
