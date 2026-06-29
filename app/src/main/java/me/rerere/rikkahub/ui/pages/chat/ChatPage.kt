@@ -299,11 +299,12 @@ private fun ChatPageContent(
 
     // Auto-compress toast notification
     val autoCompressToaster = LocalToaster.current
+    val autoCompressToastMsg = stringResource(R.string.setting_auto_compress_desc)
     LaunchedEffect(Unit) {
         vm.autoCompressDoneFlow.collect {
             autoCompressToaster.show(
-                message = stringResource(R.string.setting_auto_compress_desc),
-                duration = 2000
+                message = autoCompressToastMsg,
+                duration = kotlin.time.Duration.Companion.milliseconds(2000)
             )
         }
     }
