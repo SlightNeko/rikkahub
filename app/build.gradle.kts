@@ -88,13 +88,13 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "VERSION_NAME", "\"${android.defaultConfig.versionName}\"")
-            buildConfigField("String", "VERSION_CODE", "\"${android.defaultConfig.versionCode}\"")
+            buildConfigField("int", "VERSION_CODE", "${android.defaultConfig.versionCode}")
         }
         debug {
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("nekohub")
             buildConfigField("String", "VERSION_NAME", "\"${android.defaultConfig.versionName}\"")
-            buildConfigField("String", "VERSION_CODE", "\"${android.defaultConfig.versionCode}\"")
+            buildConfigField("int", "VERSION_CODE", "${android.defaultConfig.versionCode}")
         }
     }
     compileOptions {
