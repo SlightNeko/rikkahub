@@ -4,7 +4,7 @@
 
 Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 擴展了系統級 AI 工具。
 
-[English](README.md) | 繁體中文 | [简体中文](README_ZH_CN.md)
+[English](README_EN.md) | 繁體中文 | [简体中文](README.md)
 </div>
 
 <div align="center">
@@ -37,6 +37,9 @@ Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 擴展了系統級 A
 - **權限** — 一站式檢視與授權所有應用權限
 - **本地工具** — 瀏覽所有可用的系統工具
 - **整合** — 配置高德 API Key、Gadgetbridge 資料庫路徑、Supabase 憑證
+- **主動訊息** — 配置主動訊息推送設定
+
+> 🐱 自訂貓貓圖示 — NekoHub Fork 專屬品牌標識
 
 ## ✨ 功能特色（來自原版 RikkaHub）
 
