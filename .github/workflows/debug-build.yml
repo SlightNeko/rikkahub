@@ -109,5 +109,5 @@ jobs:
           files: ${{ steps.apk.outputs.path }}
           name: "NekoHub Release"
           tag_name: "build-${{ github.run_number }}"
-          prerelease: true
+          prerelease: false
           generate_release_notes: true
