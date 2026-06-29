@@ -80,9 +80,13 @@ fun UpdateCard(vm: ChatVM) {
     state.onSuccess { info ->
         var showDetail by remember { mutableStateOf(false) }
         var dismissed by remember { mutableStateOf(false) }
-        val current = remember { Version(BuildConfig.VERSION_NAME) }
-        val latest = remember(info) { Version(info.version) }
-        if (latest > current && !dismissed) {
+        val currentCode = remember { 
+            BuildConfig.VERSION_NAME.split(".").getOrElse(3) { "0" }.toIntOrNull() ?: 0
+        }
+        val latestCode = remember(info) {
+            info.version.split(".").getOrElse(3) { "0" }.toIntOrNull() ?: 0
+        }
+        if (latestCode > currentCode && !dismissed) {
             Card(
                 onClick = {
                     showDetail = true
