@@ -1,6 +1,9 @@
 <div align="center">
-  <img src="docs/icon.png" alt="App 图标" width="100" />
-  <h1>NekoHub</h1>
+  <picture>
+    <source srcset="docs/icon.png" media="(prefers-color-scheme: dark)" />
+    <img src="docs/icon-dark.png" alt="NekoHub 猫猫图标" width="100" />
+  </picture>
+  <h1>NekoHub 🐱</h1>
 
 Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 扩展了系统级 AI 工具。
 
