@@ -30,15 +30,31 @@ jobs:
           corepack enable
           corepack prepare pnpm@latest --activate
 
-      - name: Generate signing keystore
+      - name: Generate signing keystore (first time only)
         run: |
-          keytool -genkey -v \
-            -keystore neko.keystore \
-            -alias slightNeko \
-            -keyalg RSA -keysize 2048 -validity 10000 \
-            -storepass 'A%p5uLwSu3j#fBw' \
-            -keypass 'A%p5uLwSu3j#fBw' \
-            -dname "CN=SlightNeko, OU=NekoHub, O=NekoHub, L=Unknown, ST=Unknown, C=CN"
+          if [ ! -f nekohub.keystore ]; then
+            keytool -genkey -v \
+              -keystore nekohub.keystore \
+              -alias slightNeko \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass 'A%p5uLwSu3j#fBw' \
+              -keypass 'A%p5uLwSu3j#fBw' \
+              -dname "CN=SlightNeko, OU=NekoHub, O=NekoHub, L=Unknown, ST=Unknown, C=CN"
+          else
+            echo "Using existing nekohub.keystore"
+          fi
+
+      - name: Commit keystore to repo (first time)
+        run: |
+          if git diff --quiet nekohub.keystore 2>/dev/null; then
+            echo "Keystore unchanged"
+          else
+            git config user.name "CI Bot"
+            git config user.email "ci@nekohub.local"
+            git add nekohub.keystore
+            git commit -m "chore: add permanent signing keystore" || true
+            git push origin master || true
+          fi
 
       - name: Create google-services.json
         run: |
@@ -84,7 +100,7 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease --no-daemon --stacktrace
         env:
-          NEKOHUB_KEYSTORE: ${{ github.workspace }}/neko.keystore
+          NEKOHUB_KEYSTORE: ${{ github.workspace }}/nekohub.keystore
           NEKOHUB_STORE_PASSWORD: 'A%p5uLwSu3j#fBw'
           NEKOHUB_KEY_ALIAS: slightNeko
           NEKOHUB_KEY_PASSWORD: 'A%p5uLwSu3j#fBw'
@@ -92,9 +108,15 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NekoHub-release
+          name: NekoHub-APK-${{ github.sha }}
           path: app/build/outputs/apk/release/*.apk
           retention-days: 7
+
+      - name: Get version
+        id: version
+        run: |
+          VNAME=$(grep 'versionName' app/build.gradle.kts | head -1 | sed 's/.*"\(.*\)".*/\1/')
+          echo "name=$VNAME" >> $GITHUB_OUTPUT
 
       - name: Find APK
         id: apk
@@ -107,7 +129,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ${{ steps.apk.outputs.path }}
-          name: "NekoHub Release"
-          tag_name: "build-${{ github.run_number }}"
+          name: "NekoHub v${{ steps.version.outputs.name }}"
+          tag_name: "v${{ steps.version.outputs.name }}"
           prerelease: false
           generate_release_notes: true
