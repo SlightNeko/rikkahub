@@ -162,6 +162,8 @@ dependencies {
     implementation(libs.androidx.profileinstaller)
     implementation(libs.termux.terminal.view)
     implementation(libs.guava.listenablefuture)
+    implementation(libs.shizuku.api)
+    implementation(libs.shizuku.provider)
 
     // Compose
     implementation(libs.androidx.activity.compose)

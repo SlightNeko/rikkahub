@@ -151,6 +151,10 @@
         android:value="androidx.startup"
         tools:node="remove" />
     </provider>
+    <provider
+      android:name="rikka.shizuku.ShizukuProvider"
+      android:authorities="${applicationId}.shizuku"
+      android:exported="true" />
 
     <service
       android:name=".data.ai.tools.local.NotificationCaptureService"
@@ -176,6 +180,20 @@
     <receiver
       android:name=".data.ai.tools.local.ProactiveMessageReceiver"
       android:exported="false" />
+
+    <service
+      android:name=".data.service.SupabaseSyncService"
+      android:foregroundServiceType="dataSync"
+      android:exported="false" />
+
+    <receiver
+      android:name=".data.service.SupabaseSyncReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="me.rerere.rikkahub.action.SUPABASE_SYNC" />
+      </intent-filter>
+    </receiver>
   </application>
 
 </manifest>
