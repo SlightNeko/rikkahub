@@ -1,5 +1,8 @@
 <div align="center">
-  <img src="docs/icon.png" alt="App 圖標" width="100" />
+  <picture>
+    <source srcset="docs/icon.png" media="(prefers-color-scheme: dark)" />
+    <img src="docs/icon-dark.png" alt="App 圖標" width="100" />
+  </picture>
   <h1>NekoHub</h1>
 
 Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 擴展了系統級 AI 工具。
@@ -14,7 +17,7 @@ Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 擴展了系統級 A
 
 ## 🚀 下載
 
-🔗 [下載 Debug APK](https://github.com/SlightNeko/rikkahub/actions) — 最新 CI 構建產物
+🔗 [最新 Release](https://github.com/SlightNeko/rikkahub/releases/latest) — 自動構建、已簽名、支援原地更新檢測
 
 此為 Fork 版本，未上架 Google Play。
 
@@ -35,11 +38,11 @@ Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 擴展了系統級 A
 
 ### 設定新增
 - **權限** — 一站式檢視與授權所有應用權限
-- **本地工具** — 瀏覽所有可用的系統工具
-- **整合** — 配置高德 API Key、Gadgetbridge 資料庫路徑、Supabase 憑證
-- **主動訊息** — 配置主動訊息推送設定
+- **整合** — 高德 API Key、Gadgetbridge 資料庫、Supabase 憑證
+- **主動訊息** — 配置主動訊息推送間隔
+- **自動壓縮** — 上下文壓縮完全可自訂（觸發條件、目標 Token、保留訊息數）
 
-> 🐱 自訂貓貓圖示 — NekoHub Fork 專屬品牌標識
+> 🐱 專屬貓貓圖示，淺色/深色模式自動切換
 
 ## ✨ 功能特色（來自原版 RikkaHub）
 
@@ -58,16 +61,19 @@ Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 擴展了系統級 A
 - 🧠 類 ChatGPT 記憶
 - 📝 AI 翻譯
 
+## 📋 更新日誌
+
+詳見 [Releases](https://github.com/SlightNeko/rikkahub/releases)
+
 ## 🔧 構建
 
-Fork 自 [re-ovo/rikkahub](https://github.com/re-ovo/rikkahub)。詳見 [AGENTS.md](CLAUDE.md)。
+Fork 自 [re-ovo/rikkahub](https://github.com/re-ovo/rikkahub)。
 
 ```bash
-# 複製
 git clone https://github.com/SlightNeko/rikkahub.git
 ```
 
-推送至 master 分支後透過 GitHub Actions 自動構建。
+推送至 master 分支後透過 GitHub Actions 自動構建並發布。
 
 > [!TIP]
 > 需要在 `app` 資料夾下放置 `google-services.json` 檔案以使用 Firebase。CI 會建立一個佔位檔案。

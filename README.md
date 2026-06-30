@@ -17,7 +17,7 @@ Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 扩展了系统级 A
 
 ## 🚀 下载
 
-🔗 [下载 Debug APK](https://github.com/SlightNeko/rikkahub/actions) — 最新 CI 构建产物
+🔗 [最新 Release](https://github.com/SlightNeko/rikkahub/releases/latest) — 自动构建、已签名、支持原地更新检测
 
 此为 Fork 版本，未上架 Google Play。
 
@@ -38,11 +38,11 @@ Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 扩展了系统级 A
 
 ### 设置新增
 - **权限** — 一站式查看和授权所有应用权限
-- **本地工具** — 浏览所有可用的系统工具
-- **集成** — 配置高德 API Key、Gadgetbridge 数据库路径、Supabase 凭据
-- **主动消息** — 配置主动消息推送设置
+- **集成** — 高德 API Key、Gadgetbridge 数据库、Supabase 凭据独立管理
+- **主动消息** — 配置主动消息推送间隔
+- **自动压缩** — 上下文压缩完全可自定义（触发条件、目标 Token、保留消息数）
 
-> 🐱 自定义猫猫图标 — NekoHub Fork 专属品牌标识
+> 🐱 专属猫猫图标，浅色/深色模式自动切换
 
 ## ✨ 功能特色（来自原版 RikkaHub）
 
@@ -67,14 +67,13 @@ Fork 自 [RikkaHub](https://github.com/re-ovo/rikkahub) — 扩展了系统级 A
 
 ## 🔧 构建
 
-Fork 自 [re-ovo/rikkahub](https://github.com/re-ovo/rikkahub)。详见 [AGENTS.md](CLAUDE.md)。
+Fork 自 [re-ovo/rikkahub](https://github.com/re-ovo/rikkahub)。
 
 ```bash
-# 克隆
 git clone https://github.com/SlightNeko/rikkahub.git
 ```
 
-推送至 master 分支后通过 GitHub Actions 自动构建。
+推送至 master 分支后通过 GitHub Actions 自动构建并发布。
 
 > [!TIP]
 > 需要在 `app` 文件夹下放置 `google-services.json` 文件以使用 Firebase。CI 会创建一个占位文件。

@@ -1,5 +1,8 @@
 <div align="center">
-  <img src="docs/icon.png" alt="App Icon" width="100" />
+  <picture>
+    <source srcset="docs/icon.png" media="(prefers-color-scheme: dark)" />
+    <img src="docs/icon-dark.png" alt="App Icon" width="100" />
+  </picture>
   <h1>NekoHub</h1>
 
 Forked from [RikkaHub](https://github.com/re-ovo/rikkahub) — extended with system-level AI tools.
@@ -14,7 +17,7 @@ Forked from [RikkaHub](https://github.com/re-ovo/rikkahub) — extended with sys
 
 ## 🚀 Download
 
-🔗 [Download Debug APK](https://github.com/SlightNeko/rikkahub/actions) — Latest CI build artifacts
+🔗 [Latest Release](https://github.com/SlightNeko/rikkahub/releases/latest) — Auto-built, signed, with in-app update detection
 
 This is a fork with added features. Not on Google Play.
 
@@ -35,11 +38,11 @@ This fork adds 20+ local system tools enabling the AI assistant to interact with
 
 ### Settings Additions
 - **Permissions** — Check & grant all app permissions in one place
-- **Local Tools** — Browse all available system tools
-- **Integrations** — Configure Amap API key, Gadgetbridge DB path, Supabase credentials
-- **Proactive Messaging** — Configure proactive message push settings
+- **Integrations** — Amap API Key, Gadgetbridge DB, Supabase credentials
+- **Proactive Messaging** — Configure proactive message push interval
+- **Auto Compress** — Fully customizable context compression (trigger conditions, target tokens, keep count)
 
-> 🐱 Custom cat logo — NekoHub fork brand identity
+> 🐱 Custom cat icon, auto-switches for light/dark mode
 
 ## ✨ Features (from original RikkaHub)
 
@@ -64,10 +67,9 @@ See [Releases](https://github.com/SlightNeko/rikkahub/releases)
 
 ## 🔧 Building
 
-Fork of [re-ovo/rikkahub](https://github.com/re-ovo/rikkahub). See [AGENTS.md](CLAUDE.md).
+Fork of [re-ovo/rikkahub](https://github.com/re-ovo/rikkahub).
 
 ```bash
-# Clone
 git clone https://github.com/SlightNeko/rikkahub.git
 ```
 
