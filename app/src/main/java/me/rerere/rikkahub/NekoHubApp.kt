@@ -241,6 +241,22 @@ class NekoHubApp : Application() {
             .setShowBadge(false)
             .build()
         notificationManager.createNotificationChannel(dailySummaryChannel)
+
+        val supabaseSyncChannel = NotificationChannelCompat
+            .Builder("supabase_sync", NotificationManagerCompat.IMPORTANCE_LOW)
+            .setName("数据同步")
+            .setVibrationEnabled(false)
+            .setShowBadge(false)
+            .build()
+        notificationManager.createNotificationChannel(supabaseSyncChannel)
+
+        val deviceEventChannel = NotificationChannelCompat
+            .Builder("device_event_tracking", NotificationManagerCompat.IMPORTANCE_LOW)
+            .setName("设备事件")
+            .setVibrationEnabled(false)
+            .setShowBadge(false)
+            .build()
+        notificationManager.createNotificationChannel(deviceEventChannel)
     }
 
     override fun onTerminate() {
