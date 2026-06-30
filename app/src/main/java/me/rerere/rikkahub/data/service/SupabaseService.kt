@@ -92,11 +92,11 @@ class SupabaseService(
             if (data.appUsage.isNotEmpty()) {
                 putJsonArray("app_usage") {
                     data.appUsage.forEach { usage ->
-                        addJsonObject {
+                        add(buildJsonObject {
                             put("package_name", usage.packageName)
                             put("app_name", usage.appName)
                             put("time_used_minutes", usage.timeUsedMinutes)
-                        }
+                        })
                     }
                 }
             }
@@ -104,12 +104,12 @@ class SupabaseService(
             if (data.notifications.isNotEmpty()) {
                 putJsonArray("notifications") {
                     data.notifications.forEach { notif ->
-                        addJsonObject {
+                        add(buildJsonObject {
                             put("app_name", notif.appName)
                             put("title", notif.title)
                             put("text", notif.text)
                             put("timestamp", notif.timestamp)
-                        }
+                        })
                     }
                 }
             }
