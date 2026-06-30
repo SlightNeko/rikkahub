@@ -73,15 +73,4 @@ sealed class LocalToolOption {
     @SerialName("screen_events")
     data object ScreenEvents : LocalToolOption()
 
-    @Serializable
-    @SerialName("proactive_messaging")
-    data object ProactiveMessaging : LocalToolOption()
-
-    @Serializable
-    @SerialName("health_data")
-    data object HealthData : LocalToolOption()
-
-    @Serializable
-    @SerialName("supabase")
-    data object Supabase : LocalToolOption()
 }

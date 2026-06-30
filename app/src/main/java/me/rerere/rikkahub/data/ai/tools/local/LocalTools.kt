@@ -25,9 +25,6 @@ class LocalTools(private val context: Context, private val eventBus: AppEventBus
     val alarmTool by lazy { buildAlarmTool(context, eventBus) }
 
     val screenEventTool by lazy { buildScreenEventTool() }
-    val proactiveMessageTool by lazy { buildProactiveMessageTool(context) }
-    val healthDataTool by lazy { buildGadgetbridgeTool(context) }
-    val supabaseTool by lazy { buildSupabaseTool(context) }
 
     fun getTools(options: List<LocalToolOption>): List<Tool> {
         val tools = mutableListOf<Tool>()
@@ -51,9 +48,6 @@ class LocalTools(private val context: Context, private val eventBus: AppEventBus
         if (options.contains(LocalToolOption.Camera)) tools.add(cameraTool)
         if (options.contains(LocalToolOption.Alarm)) tools.add(alarmTool)
         if (options.contains(LocalToolOption.ScreenEvents)) tools.add(screenEventTool)
-        if (options.contains(LocalToolOption.ProactiveMessaging)) tools.add(proactiveMessageTool)
-        if (options.contains(LocalToolOption.HealthData)) tools.add(healthDataTool)
-        if (options.contains(LocalToolOption.Supabase)) tools.add(supabaseTool)
         return tools
     }
 }

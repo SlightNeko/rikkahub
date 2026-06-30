@@ -61,9 +61,6 @@ val ALL_LOCAL_TOOLS = listOf(
     LocalToolOption.Camera to R.string.assistant_page_local_tools_camera_title,
     LocalToolOption.Alarm to R.string.assistant_page_local_tools_alarm_title,
     LocalToolOption.ScreenEvents to R.string.assistant_page_local_tools_screen_events_title,
-    LocalToolOption.ProactiveMessaging to R.string.assistant_page_local_tools_proactive_message_title,
-    LocalToolOption.HealthData to R.string.assistant_page_local_tools_health_data_title,
-    LocalToolOption.Supabase to R.string.assistant_page_local_tools_supabase_title,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -137,9 +134,6 @@ private fun toolIcon(option: LocalToolOption) = when (option) {
     LocalToolOption.Camera -> HugeIcons.Camera01
     LocalToolOption.Alarm -> HugeIcons.AlarmClock
     LocalToolOption.ScreenEvents -> HugeIcons.Favourite
-    LocalToolOption.ProactiveMessaging -> HugeIcons.Message01
-    LocalToolOption.HealthData -> HugeIcons.Favourite
-    LocalToolOption.Supabase -> HugeIcons.Database02
 }
 
 private fun toolDesc(option: LocalToolOption, context: Context): String {
@@ -161,9 +155,6 @@ private fun toolDesc(option: LocalToolOption, context: Context): String {
         LocalToolOption.Camera -> R.string.assistant_page_local_tools_camera_desc
         LocalToolOption.Alarm -> R.string.assistant_page_local_tools_alarm_desc
         LocalToolOption.ScreenEvents -> R.string.assistant_page_local_tools_screen_events_desc
-        LocalToolOption.ProactiveMessaging -> R.string.assistant_page_local_tools_proactive_message_desc
-        LocalToolOption.HealthData -> R.string.assistant_page_local_tools_health_data_desc
-        LocalToolOption.Supabase -> R.string.assistant_page_local_tools_supabase_desc
     }
     return if (id != null) context.getString(id) else ""
 }

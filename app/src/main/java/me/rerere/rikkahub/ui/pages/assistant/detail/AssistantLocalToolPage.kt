@@ -460,48 +460,6 @@ private fun AssistantLocalToolContent(
                     )
                 }
             )
-            item(
-                headlineContent = {
-                    Text(stringResource(R.string.assistant_page_local_tools_proactive_message_title))
-                },
-                supportingContent = {
-                    Text(stringResource(R.string.assistant_page_local_tools_proactive_message_desc))
-                },
-                trailingContent = {
-                    Switch(
-                        checked = assistant.localTools.contains(LocalToolOption.ProactiveMessaging),
-                        onCheckedChange = { toggleLocalTool(LocalToolOption.ProactiveMessaging, it) }
-                    )
-                }
-            )
-            item(
-                headlineContent = {
-                    Text(stringResource(R.string.assistant_page_local_tools_health_data_title))
-                },
-                supportingContent = {
-                    Text(stringResource(R.string.assistant_page_local_tools_health_data_desc))
-                },
-                trailingContent = {
-                    Switch(
-                        checked = assistant.localTools.contains(LocalToolOption.HealthData),
-                        onCheckedChange = { toggleLocalTool(LocalToolOption.HealthData, it) }
-                    )
-                }
-            )
-            item(
-                headlineContent = {
-                    Text(stringResource(R.string.assistant_page_local_tools_supabase_title))
-                },
-                supportingContent = {
-                    Text(stringResource(R.string.assistant_page_local_tools_supabase_desc))
-                },
-                trailingContent = {
-                    Switch(
-                        checked = assistant.localTools.contains(LocalToolOption.Supabase),
-                        onCheckedChange = { toggleLocalTool(LocalToolOption.Supabase, it) }
-                    )
-                }
-            )
         }
     }
 }
