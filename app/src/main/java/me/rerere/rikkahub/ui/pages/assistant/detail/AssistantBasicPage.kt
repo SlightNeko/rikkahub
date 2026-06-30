@@ -488,6 +488,30 @@ internal fun AssistantBasicContent(
             FormItem(
                 modifier = Modifier.padding(8.dp),
                 label = {
+                    Text(stringResource(R.string.assistant_page_auto_compress))
+                },
+                description = {
+                    Text(stringResource(R.string.assistant_page_auto_compress_desc))
+                },
+                tail = {
+                    Switch(
+                        checked = assistant.autoCompressEnabled,
+                        onCheckedChange = {
+                            onUpdate(
+                                assistant.copy(
+                                    autoCompressEnabled = it
+                                )
+                            )
+                        }
+                    )
+                }
+            )
+
+            HorizontalDivider()
+
+            FormItem(
+                modifier = Modifier.padding(8.dp),
+                label = {
                     Text(stringResource(R.string.assistant_page_gradient_background))
                 },
                 description = {

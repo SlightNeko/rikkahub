@@ -865,9 +865,10 @@ class ChatService(
      */
     suspend fun checkAndAutoCompress(conversationId: Uuid) {
         val settings = settingsStore.settingsFlow.first()
-        if (!settings.autoCompressEnabled) return
-
         val conversation = sessions[conversationId]?.state?.value ?: return
+        val assistant = settings.getAssistantById(conversation.assistantId)
+        val autoCompressEnabled = settings.autoCompressEnabled || (assistant?.autoCompressEnabled == true)
+        if (!autoCompressEnabled) return
         val messages = conversation.currentMessages
         if (messages.isEmpty()) return
 

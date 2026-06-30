@@ -72,5 +72,24 @@ sealed class LocalToolOption {
     @Serializable
     @SerialName("screen_events")
     data object ScreenEvents : LocalToolOption()
+}
 
+fun LocalToolOption.toSerialName(): String = when (this) {
+    LocalToolOption.JavascriptEngine -> "javascript_engine"
+    LocalToolOption.TimeInfo -> "time_info"
+    LocalToolOption.Clipboard -> "clipboard"
+    LocalToolOption.Tts -> "tts"
+    LocalToolOption.AskUser -> "ask_user"
+    LocalToolOption.ScreenTime -> "screen_time"
+    LocalToolOption.Calendar -> "calendar"
+    LocalToolOption.Location -> "location"
+    LocalToolOption.Notification -> "notification"
+    LocalToolOption.AppUsageTrajectory -> "app_usage_trajectory"
+    LocalToolOption.NearbyPoi -> "nearby_poi"
+    LocalToolOption.Battery -> "battery"
+    LocalToolOption.Sms -> "sms"
+    LocalToolOption.MusicControl -> "music_control"
+    LocalToolOption.Camera -> "camera"
+    LocalToolOption.Alarm -> "alarm"
+    LocalToolOption.ScreenEvents -> "screen_events"
 }

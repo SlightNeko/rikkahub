@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.Switch
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -52,6 +53,8 @@ fun SettingIntegrationPage() {
     var healthDbPath by remember { mutableStateOf(prefs.getString("health_db_path", "/sdcard/Gadgetbridge/gadgetbridge.db") ?: "/sdcard/Gadgetbridge/gadgetbridge.db") }
     var supabaseUrl by remember { mutableStateOf(prefs.getString("supabase_url", "") ?: "") }
     var supabaseKey by remember { mutableStateOf(prefs.getString("supabase_key", "") ?: "") }
+    var supabaseEnabled by remember { mutableStateOf(prefs.getBoolean("supabase_enabled", true)) }
+    var healthEnabled by remember { mutableStateOf(prefs.getBoolean("health_enabled", true)) }
 
     Scaffold(
         topBar = {
@@ -124,7 +127,10 @@ fun SettingIntegrationPage() {
                         .padding(horizontal = 8.dp)
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Icon(
                                 HugeIcons.Health, null,
                                 modifier = Modifier.size(24.dp),
@@ -133,7 +139,14 @@ fun SettingIntegrationPage() {
                             Text(
                                 text = stringResource(R.string.setting_integration_health),
                                 style = MaterialTheme.typography.titleSmall,
-                                modifier = Modifier.padding(start = 8.dp)
+                                modifier = Modifier.padding(start = 8.dp).weight(1f)
+                            )
+                            Switch(
+                                checked = healthEnabled,
+                                onCheckedChange = {
+                                    healthEnabled = it
+                                    prefs.edit().putBoolean("health_enabled", it).apply()
+                                }
                             )
                         }
                         Text(
@@ -145,6 +158,7 @@ fun SettingIntegrationPage() {
                         OutlinedTextField(
                             value = healthDbPath,
                             onValueChange = { healthDbPath = it },
+                            enabled = healthEnabled,
                             label = { Text(stringResource(R.string.setting_integration_health_path_label)) },
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true
@@ -169,7 +183,10 @@ fun SettingIntegrationPage() {
                         .padding(horizontal = 8.dp)
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Icon(
                                 HugeIcons.Database02, null,
                                 modifier = Modifier.size(24.dp),
@@ -178,7 +195,14 @@ fun SettingIntegrationPage() {
                             Text(
                                 text = stringResource(R.string.setting_integration_supabase),
                                 style = MaterialTheme.typography.titleSmall,
-                                modifier = Modifier.padding(start = 8.dp)
+                                modifier = Modifier.padding(start = 8.dp).weight(1f)
+                            )
+                            Switch(
+                                checked = supabaseEnabled,
+                                onCheckedChange = {
+                                    supabaseEnabled = it
+                                    prefs.edit().putBoolean("supabase_enabled", it).apply()
+                                }
                             )
                         }
                         Text(
@@ -190,6 +214,7 @@ fun SettingIntegrationPage() {
                         OutlinedTextField(
                             value = supabaseUrl,
                             onValueChange = { supabaseUrl = it },
+                            enabled = supabaseEnabled,
                             label = { Text(stringResource(R.string.setting_integration_supabase_url_label)) },
                             placeholder = { Text("https://xxxxxxxxxxxx.supabase.co") },
                             modifier = Modifier.fillMaxWidth(),
@@ -199,6 +224,7 @@ fun SettingIntegrationPage() {
                         OutlinedTextField(
                             value = supabaseKey,
                             onValueChange = { supabaseKey = it },
+                            enabled = supabaseEnabled,
                             label = { Text(stringResource(R.string.setting_integration_supabase_key_label)) },
                             placeholder = { Text("anon key") },
                             modifier = Modifier.fillMaxWidth(),

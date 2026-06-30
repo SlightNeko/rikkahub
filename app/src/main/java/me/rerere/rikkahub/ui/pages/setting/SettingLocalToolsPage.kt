@@ -1,19 +1,25 @@
 package me.rerere.rikkahub.ui.pages.setting
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeFlexibleTopAppBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -38,6 +44,7 @@ import me.rerere.hugeicons.stroke.Time02
 import me.rerere.hugeicons.stroke.WavingHand01
 import me.rerere.rikkahub.R
 import me.rerere.rikkahub.data.ai.tools.local.LocalToolOption
+import me.rerere.rikkahub.data.ai.tools.local.toSerialName
 import me.rerere.rikkahub.ui.components.nav.BackButton
 import me.rerere.rikkahub.ui.components.ui.CardGroup
 import me.rerere.rikkahub.ui.theme.CustomColors
@@ -68,6 +75,18 @@ val ALL_LOCAL_TOOLS = listOf(
 fun SettingLocalToolsPage() {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
+    val prefs = remember {
+        context.getSharedPreferences("rikkahub_local_tools", Context.MODE_PRIVATE)
+    }
+
+    val switchStates = remember {
+        val map = mutableStateMapOf<String, Boolean>()
+        ALL_LOCAL_TOOLS.forEach { (option, _) ->
+            val key = option.toSerialName()
+            map[key] = prefs.getBoolean(key, true)
+        }
+        map
+    }
 
     Scaffold(
         topBar = {
@@ -95,6 +114,24 @@ fun SettingLocalToolsPage() {
                 )
             }
 
+            // "一键启用所有系统工具" button
+            item {
+                Button(
+                    onClick = {
+                        ALL_LOCAL_TOOLS.forEach { (option, _) ->
+                            val key = option.toSerialName()
+                            switchStates[key] = true
+                            prefs.edit().putBoolean(key, true).apply()
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp)
+                ) {
+                    Text(stringResource(R.string.setting_local_tools_enable_all))
+                }
+            }
+
             item {
                 CardGroup(
                     modifier = Modifier.padding(horizontal = 8.dp),
@@ -104,10 +141,22 @@ fun SettingLocalToolsPage() {
                         val icon = toolIcon(option)
                         val title = context.getString(titleRes)
                         val desc = toolDesc(option, context)
+                        val toolKey = option.toSerialName()
+                        val enabled = switchStates[toolKey] ?: true
+
                         item(
                             leadingContent = { Icon(icon, null, modifier = Modifier.size(24.dp)) },
                             headlineContent = { Text(title) },
-                            supportingContent = { Text(desc) }
+                            supportingContent = { Text(desc) },
+                            trailingContent = {
+                                Switch(
+                                    checked = enabled,
+                                    onCheckedChange = { newValue ->
+                                        switchStates[toolKey] = newValue
+                                        prefs.edit().putBoolean(toolKey, newValue).apply()
+                                    }
+                                )
+                            }
                         )
                     }
                 }

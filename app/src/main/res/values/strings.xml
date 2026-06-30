@@ -1154,6 +1154,8 @@
   <string name="setting_provider_page_include_history_reasoning">Include History Reasoning</string>
   <string name="assistant_page_gradient_background">Gradient Background</string>
   <string name="assistant_page_gradient_background_desc">Use a dynamic gradient background on the chat page</string>
+  <string name="assistant_page_auto_compress">Auto Compress</string>
+  <string name="assistant_page_auto_compress_desc">Override global auto-compress setting for this session. When enabled, auto-compression will trigger even when the global switch is off.</string>
   <string name="assistant_page_workspace">Workspace</string>
   <string name="assistant_page_workspace_desc">After binding, the Agent can use this workspace\'s files and sandbox capabilities</string>
   <string name="assistant_page_workspace_unbound">Not bound</string>
@@ -1327,6 +1329,7 @@
   <string name="setting_local_tools_title">Local Tools</string>
   <string name="setting_local_tools_desc">All available local tools in this app. Enable them per assistant in Assistant settings.</string>
   <string name="setting_local_tools_all_tools">All Tools</string>
+  <string name="setting_local_tools_enable_all">Enable All System Tools</string>
   <string name="setting_local_tools_enabled">enabled</string>
   <string name="setting_local_tools_disabled">disabled</string>
   <string name="setting_local_tools_tools_enabled">tools enabled</string>
