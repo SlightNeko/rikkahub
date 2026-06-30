@@ -92,7 +92,7 @@ class SupabaseService(
             if (data.appUsage.isNotEmpty()) {
                 putJsonArray("app_usage") {
                     data.appUsage.forEach { usage ->
-                        +buildJsonObject {
+                        addJsonObject {
                             put("package_name", usage.packageName)
                             put("app_name", usage.appName)
                             put("time_used_minutes", usage.timeUsedMinutes)
@@ -104,7 +104,7 @@ class SupabaseService(
             if (data.notifications.isNotEmpty()) {
                 putJsonArray("notifications") {
                     data.notifications.forEach { notif ->
-                        +buildJsonObject {
+                        addJsonObject {
                             put("app_name", notif.appName)
                             put("title", notif.title)
                             put("text", notif.text)
@@ -120,11 +120,11 @@ class SupabaseService(
 
             // Nest health data as a JSON object column
             data.health?.let { h ->
-                putJsonObject("health_data") {
+                put("health_data", buildJsonObject {
                     put("step_count", h.stepCount)
                     put("heart_rate", h.heartRate)
                     put("sleep_minutes", h.sleepMinutes)
-                }
+                })
             }
         }
     }

@@ -247,17 +247,13 @@ class GadgetbridgeService(private val context: Context) {
         // Copy the DB from Gadgetbridge's sandbox to a world-readable temp location.
         // Shizuku.newProcess() runs commands with shell (ADB) privileges.
         val copySuccess = try {
-            val process = Shizuku.newProcess(
-                arrayOf(
-                    "sh", "-c",
-                    "cp '$DB_PATH' '$TEMP_DB_PATH' && " +
-                        "cp '${DB_PATH}-shm' '$TEMP_DB_PATH-shm' 2>/dev/null; " +
-                        "cp '${DB_PATH}-wal' '$TEMP_DB_PATH-wal' 2>/dev/null; " +
-                        "chmod 644 '$TEMP_DB_PATH'*"
-                ),
-                null,
-                null
+            val pb = ProcessBuilder("sh", "-c",
+                "cp '$DB_PATH' '$TEMP_DB_PATH' && " +
+                    "cp '${DB_PATH}-shm' '$TEMP_DB_PATH-shm' 2>/dev/null; " +
+                    "cp '${DB_PATH}-wal' '$TEMP_DB_PATH-wal' 2>/dev/null; " +
+                    "chmod 644 '$TEMP_DB_PATH'*"
             )
+            val process = pb.start()
             process.waitFor()
             process.exitValue() == 0
         } catch (e: Exception) {

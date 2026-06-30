@@ -50,7 +50,7 @@ class SupabaseSyncService : Service() {
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var scheduler: ScheduledExecutorService? = null
-    private lateinit var notificationBuilder: NotificationCompat.Builder
+    private lateinit var notificationBuilder: android.app.Notification
 
     override fun onBind(intent: Intent?): IBinder? = null
 
