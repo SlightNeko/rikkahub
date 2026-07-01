@@ -1367,5 +1367,9 @@
   <string name="setting_auto_compress_additional_prompt">Additional instructions</string>
   <string name="setting_auto_compress_desc">Automatically compress conversation history when triggers are met</string>
   <string name="setting_auto_compress_turns_unit">turns</string>
+  <string name="setting_page_plugin">Plugins</string>
+  <string name="setting_page_plugin_desc">Manage installed plugins</string>
+  <string name="setting_page_plugin_installed">Installed Plugins</string>
+  <string name="setting_page_plugin_empty">No plugins installed. Download plugin ZIPs to get started.</string>
 </resources>
 

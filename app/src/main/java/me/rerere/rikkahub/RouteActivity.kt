@@ -126,6 +126,8 @@ import me.rerere.rikkahub.ui.pages.setting.SettingLocalToolsPage
 import me.rerere.rikkahub.ui.pages.setting.SettingProactivePage
 import me.rerere.rikkahub.ui.pages.setting.SettingIntegrationPage
 import me.rerere.rikkahub.ui.pages.setting.SettingAutoCompressPage
+import me.rerere.rikkahub.ui.pages.setting.SettingPluginPage
+import me.rerere.rikkahub.plugin.ui.PluginDetailPage
 import me.rerere.rikkahub.ui.pages.share.handler.ShareHandlerPage
 import me.rerere.rikkahub.ui.pages.stats.StatsPage
 import me.rerere.rikkahub.ui.pages.translator.TranslatorPage
@@ -445,6 +447,18 @@ class RouteActivity : ComponentActivity() {
                                 SettingAutoCompressPage()
                             }
 
+                            entry<Screen.SettingPlugin> {
+                                SettingPluginPage(
+                                    onNavigateToDetail = { pluginId ->
+                                        navController.navigate(Screen.PluginDetail(pluginId))
+                                    }
+                                )
+                            }
+
+                            entry<Screen.PluginDetail> { key ->
+                                PluginDetailPage(pluginId = key.pluginId)
+                            }
+
                             entry<Screen.SettingProvider> {
                                 SettingProviderPage()
                             }
@@ -680,6 +694,12 @@ sealed interface Screen : NavKey {
 
     @Serializable
     data object SettingAutoCompress : Screen
+
+    @Serializable
+    data object SettingPlugin : Screen
+
+    @Serializable
+    data class PluginDetail(val pluginId: String) : Screen
 
     @Serializable
     data object SettingProvider : Screen
