@@ -151,10 +151,6 @@
         android:value="androidx.startup"
         tools:node="remove" />
     </provider>
-    <provider
-      android:name="rikka.shizuku.ShizukuProvider"
-      android:authorities="${applicationId}.shizuku"
-      android:exported="true" />
 
     <service
       android:name=".data.ai.tools.local.NotificationCaptureService"
